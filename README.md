@@ -1,20 +1,20 @@
-# Veriforge   
+# Verichain   
 On-chain reputation for ethical crypto
-# Veriforge   
+# Verichain    
 > **Forge Trust. Earn Integrity. Own Your Reputation.**
 
-Veriforge is a decentralized reputation protocol that turns ethical on-chain behavior into a user-owned, monetizable asset: the **TrustScore NFT**.
+Verichain is a decentralized reputation protocol that turns ethical on-chain behavior into a user-owned, monetizable asset: the **TrustScore NFT**.
 
 We enable builders to prove integrity *before* token launch—and users to verify if a new project is more than a pump-and-dump scheme.
 
-🌐 **Website**: [veriforgexyz](https://veriforge.xyz)  
+🌐 **Website**: [verichainxyz](https://verichain.xyz)  
 📄 **Standard**: [Genesis TrustScore v0.1](./GENESIS_STANDARD.md)  
-🗞️ **Announcements**: [Mirror](https://mirror.xyz/veriforge.eth)  
-🐦 **Updates**: [@Veriforgexyz](https://twitter.com/Veriforge_xyz)
+🗞️ **Announcements**: [Mirror](https://mirror.xyz/verichain.eth)  
+🐦 **Updates**: [@Verichainxyz](https://twitter.com/Verichain.xyz)
 
 ---
 
-## Why Veriforge?
+## Why Verichain?
 - 🔒 **Pre-token reputation**: Teams earn trust *before* liquidity exists  
 - 🛡️ **Scam-resistant**: On-chain proof > marketing hype  
 - 🌐 **Private by default**: Zero-knowledge proofs protect your history  
