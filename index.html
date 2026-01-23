@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EthosiFi — Proof of Ethics, On-Chain</title>
   <style>
-    * { margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
       background: #000;
-      color: #6ee7b7;
-      font-family: 'Courier New', monospace;
+      color: #e2e8f0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     #matrixCanvas {
       position: absolute;
@@ -26,71 +26,114 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       max-width: 760px;
       margin: 0 auto;
-      pointer-events: none; /* So rain shows through */
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
     }
-    .content * {
-      pointer-events: auto; /* But text is clickable */
+
+    /* Universal text panel */
+    .text-panel {
+      background: rgba(10, 18, 35, 0.78);
+      border: 1px solid rgba(13, 148, 136, 0.22);
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+      backdrop-filter: blur(6px);
+      display: inline-block;
+      margin: 0 auto;
+      width: fit-content;
+      min-width: 90%;
+      text-align: center;
     }
+
     h1 {
-      font-size: 2.4rem;
-      margin-bottom: 1.4rem;
-      text-shadow: 0 0 10px rgba(110, 231, 183, 0.8);
-      letter-spacing: -0.5px;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      background: linear-gradient(90deg, #0d9488, #6ee7b7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
-    p {
+
+    p, .footer-text {
       font-size: 1.05rem;
       line-height: 1.6;
-      margin-bottom: 1.1rem;
-      opacity: 0.92;
+      opacity: 0.95;
     }
-    a {
+
+    .highlight {
       color: #6ee7b7;
-      text-decoration: underline;
-      font-weight: bold;
+      font-weight: 600;
     }
+
+    .cta-link {
+      color: #6ee7b7;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      background: rgba(13, 148, 136, 0.18);
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 0.6rem;
+      transition: background 0.3s;
+    }
+
+    .cta-link:hover {
+      background: rgba(13, 148, 136, 0.28);
+    }
+
     .footer {
-      margin-top: 2.5rem;
-      opacity: 0.5;
-      font-size: 0.85rem;
+      margin-top: 1rem;
+      opacity: 0.65;
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
+
     @media (max-width: 600px) {
-      h1 { font-size: 1.8rem; }
-      .content { padding: 1.5rem; }
-      p { font-size: 1rem; }
+      h1 { font-size: 2rem; }
+      .text-panel { padding: 1.2rem 1.4rem; min-width: 95%; }
+      p, .footer-text { font-size: 1rem; }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <canvas id="matrixCanvas"></canvas>
 
   <div class="content">
-    <h1>Prove Integrity Through Action</h1>
-    <p>EthosiFi measures <strong>on-chain behavior</strong>—not documents—to verify ethical crypto projects <strong>before launch</strong>.</p>
-    
-    <p><strong>For Builders:</strong> Earn an Ethoscan Genesis Score by locking LP, using transparent treasuries, signing fair launch pledges, and verifying team identity.</p>
-    
-    <p><strong>For Investors:</strong> See a project’s score directly in your wallet and DEX—no tab switching.</p>
-    
-    <p><strong>Not document verification. Behavioral integrity.</strong></p>
-    
-    <p><a href="https://github.com/ethosifi/standard" target="_blank">Read the Standard</a></p>
-    
-    <div class="footer">
-      © 2026 EthosiFi Protocol — Building the immune system for Web4.<br>
-      Ethoscan Genesis Score Standard v0.1 | ENS: ethosifi.eth
+    <div class="text-panel">
+      <h1>Prove Integrity Through Action</h1>
+    </div>
+
+    <div class="text-panel">
+      <p>EthosiFi measures <span class="highlight">on-chain behavior</span>—not documents—to verify ethical crypto projects <span class="highlight">before launch</span>.</p>
+    </div>
+
+    <div class="text-panel">
+      <p><span class="highlight">For Builders:</span> Earn an Ethoscan Genesis Score by locking LP, using transparent treasuries, signing fair launch pledges, and verifying team identity.</p>
+    </div>
+
+    <div class="text-panel">
+      <p><span class="highlight">For Investors:</span> See a project’s score directly in your wallet and DEX—no tab switching.</p>
+    </div>
+
+    <div class="text-panel">
+      <p><span class="highlight">Not document verification. Behavioral integrity.</span></p>
+      <a href="https://github.com/ethosifi/standard" target="_blank" class="cta-link">Read the Standard</a>
+    </div>
+
+    <div class="text-panel footer">
+      <p class="footer-text">© 2026 EthosiFi Protocol — Building the immune system for Web4.<br>Ethoscan Genesis Score Standard v0.1 | ENS: ethosifi.eth</p>
     </div>
   </div>
 
   <script>
-    // === MATRIX RAIN THAT WORKS EVERYWHERE ===
     (function() {
       const canvas = document.getElementById('matrixCanvas');
       const ctx = canvas.getContext('2d');
 
-      // Set size
       function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -98,50 +141,39 @@
       resize();
       window.addEventListener('resize', resize);
 
-      // Characters
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%&@#";
       const charArray = chars.split('');
       const fontSize = 14;
       const columns = Math.floor(canvas.width / fontSize);
       
-      // Each column: current y position
       const drops = [];
       for (let i = 0; i < columns; i++) {
         drops[i] = Math.random() * -100;
       }
 
-      // Draw frame
       function draw() {
-        // Fade trail
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = '#6ee7b7';
-        ctx.font = `bold ${fontSize}px monospace`;
+        ctx.font = `500 ${fontSize}px monospace`;
 
         for (let i = 0; i < drops.length; i++) {
           const text = charArray[Math.floor(Math.random() * charArray.length)];
           ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-          // Reset randomly
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.993) {
             drops[i] = 0;
           }
-          drops[i]++;
+          drops[i] += 0.45; // Very slow scroll
         }
       }
 
-      // Start animation
-      if (typeof requestAnimationFrame !== 'undefined') {
-        function animate() {
-          draw();
-          requestAnimationFrame(animate);
-        }
-        animate();
-      } else {
-        // Fallback
-        setInterval(draw, 33);
+      function animate() {
+        draw();
+        requestAnimationFrame(animate);
       }
+      animate();
     })();
   </script>
 </body>
