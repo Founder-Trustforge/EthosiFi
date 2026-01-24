@@ -6,50 +6,51 @@
   <title>EthosiFi — Proof of Ethics, On-Chain</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-      color: #e2e8f0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+    
+    /* Canvas stays fixed behind scrollable content */
     #matrixCanvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
+      pointer-events: none;
     }
+
+    body {
+      background: #000;
+      color: #e2e8f0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      position: relative;
+    }
+
     .content {
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 2rem 1.5rem;
+      padding: 3rem 1.5rem 4rem;
       max-width: 760px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 1.6rem;
+      gap: 1.8rem;
     }
 
-    /* Universal text panel */
     .text-panel {
-      background: rgba(10, 18, 35, 0.78);
-      border: 1px solid rgba(13, 148, 136, 0.22);
+      background: rgba(10, 18, 35, 0.82);
+      border: 1px solid rgba(13, 148, 136, 0.25);
       border-radius: 14px;
-      padding: 1.4rem 1.6rem;
+      padding: 1.5rem 1.8rem;
       backdrop-filter: blur(6px);
-      display: inline-block;
       margin: 0 auto;
-      width: fit-content;
-      min-width: 90%;
+      width: 94%;
       text-align: center;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       line-height: 1.2;
       background: linear-gradient(90deg, #0d9488, #6ee7b7);
       -webkit-background-clip: text;
@@ -58,9 +59,9 @@
     }
 
     p, .footer-text {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      opacity: 0.95;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      opacity: 0.96;
     }
 
     .highlight {
@@ -72,36 +73,38 @@
       color: #6ee7b7;
       text-decoration: none;
       font-weight: 600;
-      padding: 0.6rem 1.4rem;
-      background: rgba(13, 148, 136, 0.18);
+      padding: 0.65rem 1.5rem;
+      background: rgba(13, 148, 136, 0.2);
       border-radius: 8px;
       display: inline-block;
-      margin-top: 0.6rem;
+      margin-top: 0.7rem;
       transition: background 0.3s;
     }
 
     .cta-link:hover {
-      background: rgba(13, 148, 136, 0.28);
+      background: rgba(13, 148, 136, 0.32);
     }
 
     .footer {
-      margin-top: 1rem;
       opacity: 0.65;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       line-height: 1.5;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      .text-panel { padding: 1.2rem 1.4rem; min-width: 95%; }
-      p, .footer-text { font-size: 1rem; }
+      h1 { font-size: 2.1rem; }
+      .text-panel { padding: 1.3rem 1.5rem; width: 96%; }
+      p, .footer-text { font-size: 1.02rem; }
+      .content { padding: 2.5rem 1.2rem 3rem; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Fixed background canvas -->
   <canvas id="matrixCanvas"></canvas>
 
+  <!-- Scrollable content -->
   <div class="content">
     <div class="text-panel">
       <h1>Prove Integrity Through Action</h1>
@@ -152,6 +155,7 @@
       }
 
       function draw() {
+        // Fade trail
         ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -165,7 +169,7 @@
           if (drops[i] * fontSize > canvas.height && Math.random() > 0.993) {
             drops[i] = 0;
           }
-          drops[i] += 0.45; // Very slow scroll
+          drops[i] += 0.45; // Slow, calm scroll
         }
       }
 
