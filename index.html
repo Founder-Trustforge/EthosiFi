@@ -474,26 +474,29 @@
       </div>
     </div>
 
-    <!-- VERIFY WALLET -->
-    <div id="verifyWallet" class="page">
-      <div class="panel">
-        <h2>Ethoscan Wallet Verifier</h2>
-        <p>Enter a project wallet or token address to check its Ethoscan Score.</p>
-        
-        <div class="form-group">
-          <label>Wallet Address</label>
-          <input type="text" id="verifyAddress" placeholder="0x..." />
-        </div>
-        
-        <button class="btn" id="verifyBtn" onclick="runVerification()">Verify Integrity</button>
-        <button class="btn btn-outline" onclick="showPage('loginPage')">Back</button>
+    <!-- VERIFY WALLET (PUBLIC PREVIEW) -->
+<div id="verifyWallet" class="page">
+  <div class="panel">
+    <h2>Ethoscan Public Preview</h2>
+    <p>Check if a project shows basic integrity signals.</p>
+    
+    <div class="form-group">
+      <label>Wallet Address</label>
+      <input type="text" id="previewAddress" placeholder="0x..." />
+    </div>
+    
+    <button class="btn" onclick="runPreviewVerification()">Check Signals</button>
+    <button class="btn btn-outline" onclick="showPage('loginPage')">Back</button>
 
-        <div id="verificationResult" style="margin-top: 1.5rem; display: none;">
-          <h3>Verification Report</h3>
-          <div id="reportContent"></div>
-        </div>
+    <div id="previewResult" style="margin-top: 1.5rem; display: none;">
+      <h3>Preview Report</h3>
+      <div id="previewContent"></div>
+      <div style="margin-top: 1.2rem;">
+        <a href="#" class="btn btn-outline" onclick="showPage('signupPage')">Sign Up for Official Ethoscan</a>
       </div>
     </div>
+  </div>
+</div>
 
     <div class="footer">
       © 2026 EthosiFi Protocol — Building the immune system for Web4.<br>
