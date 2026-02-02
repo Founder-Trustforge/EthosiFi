@@ -74,3 +74,46 @@ Existing reputation systems often depend on centralized or easily faked signals 
       uint256 timestamp,
       bytes32 scoreHash
   );
+2. Score Calculation (v0.1 – off-chain / semi-permissionless)
+Project submits core wallet address + supporting evidence (ENS, IPFS hashes, etc.)
+Verifier (initially manual / community, later Ethoscan engine) checks each category
+Score is calculated → signed by verifier key → stored on-chain or via oracle
+Future: fully on-chain calculation for categories 3–7 via event indexing + ZK proofs for privacy-sensitive items.
+3. Fair Launch Pledge Message Format (example)
+I, {project ENS or 0x...}, solemnly declare for {token contract address}:
+
+- No private sales or pre-mined tokens to insiders
+- Maximum wallet size ≤ 1% at launch
+- Liquidity added publicly via fair mechanism
+- No renounce ownership trickery
+
+Signed: {SIWE message}
+Rationale
+Why 500 max? Keeps numbers simple and human-readable
+Why high weight on LP lock? Liquidity rugs are the #1 cause of user loss
+Why no KYC/PDFs? They are easily faked, centralized, and privacy-invasive
+Why soulbound? Prevents trading of reputation (core security property)
+Security Considerations
+Sybil resistance: multiple wallets can be linked but score is not additive per entity
+Collusion risk: mitigated by on-chain verifiability and community challenge period
+Oracle/verifier compromise: future versions will use decentralized computation or ZK
+Front-running score updates: planned commit-reveal scheme
+Inactive projects: planned score decay after 12–18 months of no activity
+Backwards Compatibility
+v0.1 is the genesis version — no prior compatibility required.
+Future versions (v1.0+) will introduce:
+ZK proofs for privacy
+Multi-chain support
+Decay function
+Challenge / dispute mechanism
+Reference Implementation
+Status: Planned (Q1–Q2 2026)
+Planned repositories:
+ethosifi-contracts — Solidity implementation
+ethoscan-verifier — scoring logic
+genesis-frontend — submission & viewing dApp
+Copyright
+© 2026 EthosiFi Protocol
+Licensed under MIT (see LICENSE in repository)
+Comments, suggestions, and pull requests are welcome via GitHub Issues or Discussions.
+Building the immune system for Web3 — one verifiable signal at a time.
