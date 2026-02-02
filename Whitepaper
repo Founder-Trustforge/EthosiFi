@@ -1,0 +1,98 @@
+# EthosiFi Whitepaper
+
+**Version 0.1**  
+**Published: February 2026**  
+**Author: Edward Beene, Founder**  
+**ENS: ethosifi.eth**  
+**Repository: https://github.com/Founder-Trustforge/EthosiFi**  
+**Website: https://ethosifi.com**  
+**Contact: Founder@EthosiFi.com | @EthosiFi on X**
+
+## Abstract
+
+EthosiFi is an on-chain reputation protocol designed to foster ethical behavior in the Web3 ecosystem. By awarding non-transferable Genesis TrustScores (soulbound NFTs) based solely on verifiable on-chain signals, EthosiFi distinguishes legitimate builders from malicious actors without relying on centralized KYC, off-chain documents, or subjective judgments. The native $ETHOS token aligns economic incentives with integrity through a burn mechanism tied to verifications, creating scarcity as trust grows. Deployed on X1 EcoChain for low-cost, energy-efficient operations, EthosiFi aims to become the foundational trust layer for DeFi, DAOs, launchpads, and beyond—reducing scams while preserving permissionless innovation.
+
+## 1. Introduction and Motivation
+
+The cryptocurrency ecosystem has revolutionized finance and coordination but remains plagued by trust deficits. In 2024 alone, over $4 billion was lost to scams, rugs, and exploits, eroding user confidence and stifling adoption. Traditional reputation systems fail due to centralization, fakability, or privacy invasion—social media followers can be bought, KYC is easily forged, and off-chain attestations lack verifiability.
+
+EthosiFi addresses this by creating a **behavioral trust layer** rooted in cryptographic proofs. We reward long-term alignment through on-chain evidence like treasury multisigs, liquidity commitments, and governance participation. No PDFs, no diplomas—only what can be proven immutably.
+
+**Core Principles:**
+- On-Chain Only: Trust signals must be verifiable via blockchain data or signatures.
+- Privacy-Preserving: Future ZK integrations allow selective disclosure.
+- Permissionless with Incentives: Verification is voluntary but economically and socially preferred.
+- Anti-Scam Infrastructure: Makes malicious tactics uneconomical without restricting freedoms.
+
+EthosiFi is built for chains like X1 EcoChain, leveraging its SVM compatibility and low-energy nodes for scalable, real-time scoring.
+
+## 2. Protocol Overview
+
+EthosiFi consists of:
+- **Genesis TrustScore**: A soulbound NFT representing a builder's ethical reputation (0–500+ points).
+- **Ethoscan Engine**: Off-chain/semi-permissionless verifier (evolving to fully on-chain) that calculates scores.
+- **Verification Flow**: Builders submit evidence → pay $ETHOS fee (burned) → receive score.
+- **Integrations**: Launchpads/DEXes query scores to feature verified projects or flag risks.
+
+**High-Level Flow:**
+1. Builder submits wallet + evidence (e.g., Gnosis Safe address, LP lock tx).
+2. Ethoscan verifies signals → computes score → issues NFT.
+3. dApps/wallets display scores → verified projects get visibility perks.
+4. Investors access scores freely, reducing "DYOR" friction.
+
+Future: Multi-chain support, ZK proofs for privacy, and decay for inactive projects.
+
+## 3. Genesis TrustScore Mechanics
+
+### 3.1 Score Tiers
+| Range     | Tier              | Badge         | Meaning                          |
+|-----------|-------------------|---------------|----------------------------------|
+| 0–199     | Unverified        | ⚠️ High Risk | No trust signals                |
+| 200–349   | Emerging Builder  | Rising       | Initial positive behaviors      |
+| 350–499   | Verified Builder  | ✅ Verified  | Strong community alignment      |
+| 500+      | Exemplar          | ★ Exemplar   | Exceptional integrity           |
+
+### 3.2 Scoring Categories (v0.1)
+| # | Category                 | Max Points | Weight | Verification Method                  | Future Improvements              |
+|---|--------------------------|------------|--------|--------------------------------------|----------------------------------|
+| 1 | Team Identity            | 40         | 8%     | ≥2 contributors sign SIWE with ENS/POAP | ZK distinct wallets             |
+| 2 | Code Transparency        | 50         | 10%    | Public GitHub ≥3 months, ENS/IPFS link | Commit history analysis         |
+| 3 | Governance Participation | 60         | 12%    | ≥6 Snapshot votes in 90 days        | Multi-chain support             |
+| 4 | Treasury Safety          | 70         | 14%    | Gnosis Safe with ≥3 ENS signers     | Transaction history review      |
+| 5 | Liquidity Commitment     | 100        | 20%    | ≥180-day LP lock in timelock        | Higher weight for rug prevention|
+| 6 | Community Engagement     | 30         | 6%     | ≥3 IPFS/Livepeer updates, signed    | Video hash verification         |
+| 7 | Fair Launch Pledge       | 50         | 10%    | Signed message: no private sales    | On-chain enforcement            |
+|   | **Total**                | **500**    | **100%**|                                      |                                  |
+
+Scores are calculated semi-permissionlessly (initially off-chain, later via oracle/ZK) and updated periodically.
+
+### 3.3 On-Chain Components
+- **TrustScoreNFT**: ERC-721 soulbound (non-transferable).
+- **Registry Contract**: Stores scores per wallet/ENS.
+- Events: `TrustScoreUpdated(address project, uint256 score, uint256 timestamp)`.
+
+## 5. Sybil Resistance and Security
+
+- **Defenses**: Wallet age (≥3–6 months), ENS/POAP linkage, ZK proofs for uniqueness, time-weighted scoring, community challenges (7-day bonded disputes).
+- **Risks & Mitigations**:
+  - Sybil: Multiple wallets linked but non-additive; escalation burns for high scores.
+  - Collusion: On-chain verifiability + challenge periods.
+  - Oracle Compromise: Evolve to decentralized/ZK computation.
+  - Rugs: Retroactive score slashing + bonded verifications.
+
+Audits planned for mainnet (e.g., via reputable firms like PeckShield or Certik).
+
+## 6. Roadmap
+
+**Q1 2026**: Testnet deployment on X1, core scoring logic, verification credits issuance.  
+**Q2 2026**: Launchpad integrations, incentive mechanics, mainnet launch.  
+**Q3–Q4 2026**: ZK privacy, multi-chain support, score decay, DAO governance.  
+**Long-Term**: Adoption as standard trust primitive across Web3.
+
+## 7. Team and Conclusion
+
+EthosiFi is founded by Edward Beene, a resilient builder with experience in Web3 development and protocol design. The project is open-source and community-driven, welcoming contributors via GitHub.
+
+In a space where scams thrive on opacity, EthosiFi builds transparency as infrastructure. By aligning profit with principle, we create an ecosystem where integrity is not optional—it's profitable. Join us in forging a safer Web3.
+
+**Disclaimer**: This whitepaper is for informational purposes. $ETHOS is not an investment; consult professionals.
