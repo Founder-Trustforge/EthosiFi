@@ -1,52 +1,79 @@
-# EthosiFi  
-On-chain reputation for ethical crypto
+<div align="center">
 
-# EthosiFi    
-> **Forge Trust. Earn Integrity. Own Your Reputation.**
+# EthosiFi – On-chain Reputation for Ethical Crypto
 
-EthosiFi is a decentralized reputation protocol that turns ethical on-chain behavior into a user-owned, monetizable asset: the **TrustScore NFT**.
+Genesis TrustScore: verifiable builder reputation without KYC  
+Protecting users • Rewarding integrity • Built for DeFi & Web3
 
-We enable builders to prove integrity *before* token launch—and users to verify if a new project is more than a pump-and-dump scheme.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Twitter Follow](https://img.shields.io/twitter/follow/EthosiFi?style=social)](https://twitter.com/EthosiFi)
 
-🌐 **Website**: [ethosifi.com](https://ethosifi.com)  
-📄 **Standard**: [Genesis TrustScore v0.1](./GENESIS_STANDARD.md)  
-🗞️ **Announcements**: [Mirror](https://mirror.com/ethosifi.eth)  
-🐦 **Updates**: [@ethosifi.com](https://twitter.com/ethosifi.com)
+</div>
 
----
+## What is EthosiFi?
 
-## Why EthosiFi?
+EthosiFi is an **on-chain reputation protocol** that awards **Genesis TrustScores** (soulbound NFTs) to builders who demonstrate verifiable ethical behavior — no PDFs, no KYC, only on-chain proof + optional ZK privacy.
 
-- 🔒 **Pre-token reputation**: Teams earn trust *before* liquidity exists  
-- 🛡️ **Scam-resistant**: On-chain proof > marketing hype  
-- 🌐 **Private by default**: Zero-knowledge proofs protect your history  
-- ⚖️ **Legally aligned**: Built-in channels for lawful anti-fraud reporting  
-- 🏦 **Business-grade infrastructure**: Treasury managed via multi-chain Gnosis Safe (Ethereum, Base, Polygon)  
-- 🧩 **Web4-native**: Reputation as a composable, cross-protocol primitive—not just a profile badge  
+The system aims to become a **trust & safety layer** for DeFi, DAOs, launchpads, grants, and community treasuries.
 
-## How It Works
+## Genesis TrustScore Standard (v0.1)
 
-### Verified Builder Recognition
-- Exemplar contributors receive **two NFTs**:
-  - A **non-transferable TrustScore NFT** (Soulbound) proving verified contribution
-  - A **limited transferable Legacy NFT** as a collectible reward
-- **NFTs are never issued to customers**—only to vetted builders and partners
+Full specification → [GENESIS_STANDARD.md](./GENESIS_STANDARD.md)
 
-### Scam Intelligence Layer
-- Community-submitted data on suspicious sites/contracts is aggregated **anonymously**
-- Designed to feed **lawful enforcement pathways**, not vigilante action
-- Supports global collaboration while respecting jurisdictional boundaries
+**Current score tiers (planned):**
 
-### Ethical & Legal Posture
-- We **avoid naming conflicts** and operate under clear legal frameworks
-- No engagement in risky or unlawful behavior—ever
-- All systems designed for **regulatory resilience**, not evasion
+- 0–199     Unverified (⚠️ High risk)  
+- 200–349   Emerging Builder  
+- 350–499   Verified Builder  
+- 500+      Exemplar
 
-## Get Involved
+## Current Status
 
-- **Builders**: Follow the [Genesis Standard](./GENESIS_STANDARD.md) to earn your TrustScore  
-- **Users**: Learn how to [verify new tokens](https) *(coming soon)*  
-- **Developers**: Contribute or integrate (Q1 2026)  
-- **Legal & Security Researchers**: Partner on fraud reporting protocols  
+🟡 **Early design & specification stage** (February 2026)
 
-*Not financial advice. This is infrastructure for ethical Web3—and the foundation of Web4.*
+- Protocol standard published  
+- Static landing page live  
+- Smart contracts, ZK verifier, Ethoscan scoring engine → coming soon
+
+## Planned Tech Stack
+
+- Chain: Base (low-cost optimistic rollup)  
+- Smart contracts: Solidity  
+- ZK proofs: circom / noir (TBD)  
+- Frontend: Next.js / React / wagmi  
+- Indexing: The Graph or custom event indexing  
+- Off-chain components: minimal, privacy-first
+
+## How to Contribute
+
+1. Read [GENESIS_STANDARD.md](./GENESIS_STANDARD.md)  
+2. Open an issue or discussion with your idea  
+3. Submit small, focused pull requests
+
+We especially welcome help with:
+- Smart contract design & security patterns
+- ZK circuit ideas
+- Documentation & diagrams
+- Test ideas & edge cases
+
+## 2026 Roadmap – Early Targets
+
+**Q1**  
+- Solidity contracts: TrustScoreNFT (soulbound), verification registry  
+- Basic Ethoscan scoring logic (on-chain behavior signals)  
+- Improved documentation & formal spec
+
+**Q2**  
+- ZK proof integration (privacy-preserving checks)  
+- Public testnet deployment  
+- Builder beta application flow
+
+## Contact & Follow
+
+- Twitter: [@EthosiFi](https://twitter.com/EthosiFi)  
+- ENS: ethosifi.eth (if claimed)  
+- Discussion: GitHub Issues / Discussions
+
+Building the immune system for Web3 — one verifiable signal at a time.
+
+</div>
