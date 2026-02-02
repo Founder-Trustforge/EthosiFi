@@ -1,36 +1,76 @@
-# EthosiFi Genesis TrustScore Standard v0.1  
-*Published: January 13, 2026 | ENS: ethosifi.eth*
+# EthosiFi Genesis TrustScore Standard  
+**Version 0.1**  
+*Published: January 13, 2026*  
+*Latest update: February 2026*  
+*ENS: ethosifi.eth*  
+*Repository: https://github.com/Founder-Trustforge/EthosiFi*
 
-This standard defines how crypto projects can earn a **Genesis TrustScore**—a verifiable, on-chain reputation metric based on **behavioral integrity**, not document claims.
+## Abstract
 
-> ⚠️ **Note**: EthosiFi verifies **on-chain actions** (e.g., LP locks, governance participation). We do **not** verify off-chain documents like KYC, diplomas, or PDFs.
+This document defines the **Genesis TrustScore** — a non-transferable, on-chain reputation signal designed to distinguish legitimate builders from malicious actors in DeFi, token launches, and Web3 projects.
 
-## Purpose
-To distinguish legitimate builders from scam artists by rewarding transparency, consistency, and user-centric behavior in DeFi and token launches.
+The score is calculated purely from **verifiable on-chain and cryptographically signed behavior**, with **no reliance on off-chain documents** (KYC, PDFs, diplomas, company registrations, etc.).
 
-## Scoring Categories (Max: 500 pts)
+Genesis TrustScore aims to become a foundational trust primitive for launchpads, DAOs, grant programs, DEXes, and community treasuries.
 
-| Category | Max Points | Verification Method |
-|--------|-----------|---------------------|
-| **Team Identity** | 40 | ≥2 core members verified via SIWE + ENS or POAP |
-| **Code Transparency** | 50 | Public GitHub repo (≥3 months) linked via ENS/IPFS |
-| **Governance Activity** | 60 | ≥6 Snapshot proposals/votes over 90 days |
-| **Treasury Safety** | 70 | Gnosis Safe with ≥3 non-anonymous signers |
-| **Liquidity Commitment** | 100 | LP locked ≥180 days in non-renounceable contract |
-| **Community Engagement** | 30 | ≥3 public AMAs (recorded on IPFS/Livepeer) |
-| **Fair Launch Pledge** | 50 | Signed message: no private sale, max wallet limits |
+## Motivation
 
-## Tiers
-- **0–199**: Unverified (⚠️ High risk)  
-- **200–349**: Emerging Builder  
-- **350–500**: ✅ Verified Builder  
-- **500+**: Exemplar  
+The crypto ecosystem suffers from repeated patterns of:
 
-## How to Submit
-1. Deploy your project’s core wallet or ENS  
-2. Perform trust-building actions  
-3. Submit for scoring at [ethosifi.com](https://ethosifi.com)   
+- Anonymous teams rug-pulling liquidity
+- Misleading marketing with fake credentials
+- Governance capture by insiders
+- Short-term liquidity farming followed by abandonment
 
-> This standard is open for community feedback. Propose changes via GitHub Issues.
+Existing reputation systems often depend on centralized or easily faked signals (social media followers, doxxing, off-chain attestations).  
 
-© 2026 EthosiFi Protocol — Building the immune system for Web3/Web4
+**EthosiFi takes a different approach:**
+
+- Only trust what can be proven on-chain or via cryptographic signatures
+- Reward long-term alignment and transparency
+- Minimize sybil attack surface
+- Keep privacy where possible (future ZK integration planned)
+
+## Genesis TrustScore Overview
+
+- **Type**: Soulbound (non-transferable) NFT or on-chain record
+- **Max score**: 500 points (v0.1)
+- **Update mechanism**: Permissionless calculation + optional governance-approved adjustments
+- **Decay**: Planned soft time-decay for inactive projects (future versions)
+
+### Current Score Tiers (v0.1)
+
+| Range       | Tier Name           | Badge / Visual          | Meaning                              |
+|-------------|---------------------|-------------------------|--------------------------------------|
+| 0–199       | Unverified          | ⚠️ High Risk            | No meaningful trust signals          |
+| 200–349     | Emerging Builder    | Rising                  | Some positive behavior observed      |
+| 350–499     | Verified Builder    | ✅ Verified             | Strong alignment with community norms|
+| 500+        | Exemplar            | ★ Exemplar              | Exceptional long-term integrity      |
+
+## Scoring Categories (v0.1)
+
+| # | Category                  | Max Points | Weight | Verification Method (v0.1)                                                                 | Notes / Future Improvement                     |
+|---|---------------------------|------------|--------|---------------------------------------------------------------------------------------------|------------------------------------------------|
+| 1 | Team Identity             | 40         | 8%     | ≥2 core contributors sign SIWE message with ENS or POAP ownership                          | ZK proof of distinct wallets planned           |
+| 2 | Code Transparency         | 50         | 10%    | Public GitHub repo ≥3 months old, linked via ENS TXT record or IPFS pointer                | Commit history analysis (future)               |
+| 3 | Governance Participation  | 60         | 12%    | ≥6 Snapshot votes/proposals in last 90 days (verified via on-chain vote delegation)       | Multi-chain governance support                 |
+| 4 | Treasury Safety           | 70         | 14%    | Gnosis Safe (or equivalent) with ≥3 non-anonymous signers (ENS-linked)                     | Multisig transaction history review            |
+| 5 | Liquidity Commitment      | 100        | 20%    | ≥180 days LP lock in non-renounceable timelock contract                                    | Higher weight = highest rug risk               |
+| 6 | Community Engagement      | 30         | 6%     | ≥3 public AMAs / updates recorded on IPFS or Livepeer, signed by core wallet               | Video hash verification (future)               |
+| 7 | Fair Launch Pledge        | 50         | 10%    | Cryptographically signed message: no private sale, max wallet %, fair token distribution  | On-chain enforcement in later versions         |
+|   | **Total**                 | **500**    | **100%**|                                                                                             |                                                |
+
+## Specification
+
+### 1. On-chain Components (planned)
+
+- `GenesisTrustScoreNFT` — ERC-721-like soulbound token (transfer disabled)
+- `TrustScoreRegistry` — contract storing score per project wallet / ENS
+- Events:
+  ```solidity
+  event TrustScoreUpdated(
+      address indexed project,
+      uint256 newScore,
+      uint256 timestamp,
+      bytes32 scoreHash
+  );
