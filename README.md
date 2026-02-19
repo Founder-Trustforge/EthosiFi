@@ -33,7 +33,7 @@ Full specification → [GENESIS_STANDARD.md](./GENESIS_STANDARD.md)
 
 - Protocol standard published  
 - Static landing page live  
-- Smart contracts, ZK verifier, Ethoscan scoring engine → coming soon
+- Smart contracts, ZK verifier, Ethoscan scoring engine
 
 ## Planned Tech Stack
 
