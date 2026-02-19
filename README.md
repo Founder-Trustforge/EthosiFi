@@ -108,7 +108,7 @@ EthosiFi is built to make ethical behavior profitable and scams the expensive ou
 ## Contact & Follow
 
 - Twitter: [@EthosiFi](https://twitter.com/EthosiFi)  
-- ENS: ethosifi.eth (if claimed)  
+- ENS: ethosifi.eth
 - Discussion: GitHub Issues / Discussions
 
 Building the immune system for Web3 — one verifiable signal at a time.
