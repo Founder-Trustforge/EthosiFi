@@ -12,7 +12,7 @@ Protecting users • Rewarding integrity • Built for DeFi & Web3
 
 ## What is EthosiFi?
 
-EthosiFi is an **on-chain reputation protocol** that awards **Genesis TrustScores** (soulbound NFTs) to builders who demonstrate verifiable ethical behavior — no PDFs, no KYC, only on-chain proof + optional ZK privacy.
+EthosiFi is an **on-chain reputation protocol** that awards **Genesis TrustScores** (soulbound NFTs) to builders who demonstrate verifiable ethical behavior — no PDFs, no KYC, only on-chain proof + ZK privacy.
 
 The system aims to become a **trust & safety layer** for DeFi, DAOs, launchpads, grants, and community treasuries.
 
