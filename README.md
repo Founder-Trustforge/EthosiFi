@@ -6,111 +6,113 @@ Genesis TrustScore: verifiable builder reputation without KYC
 Protecting users • Rewarding integrity • Built for DeFi & Web3
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Twitter Follow](https://img.shields.io/twitter/follow/EthosiFi?style=social)](https://twitter.com/EthosiFi)
+[![X1 Testnet](https://img.shields.io/badge/network-X1%20Testnet-00c853)](https://maculatus-scan.x1eco.com)
 
 </div>
 
 ## What is EthosiFi?
 
-EthosiFi is an **on-chain reputation protocol** that awards **Genesis TrustScores** (soulbound NFTs) to builders who demonstrate verifiable ethical behavior — no PDFs, no KYC, only on-chain proof + ZK privacy.
+EthosiFi is an **on-chain reputation protocol** that verifies project integrity through behavioral proof — not marketing hype. We score wallets based on **actionable integrity signals** that protect builders and investors from scams.
 
-The system aims to become a **trust & safety layer** for DeFi, DAOs, launchpads, grants, and community treasuries.
+**Core principle:** Trust through action, not words. No KYC. No fabricated scores. Only verifiable on-chain proof.
 
-## Genesis TrustScore Standard (v0.1)
+## Current Verification Capabilities (X1 Testnet)
 
-Full specification → [GENESIS_STANDARD.md](./GENESIS_STANDARD.md)
+| Pillar | Status | Verification Method | Points |
+|--------|--------|---------------------|--------|
+| **Treasury Transparency** | ✅ ACTIVE | Real Gnosis Safe detection via bytecode pattern matching + owner count verification | 250 |
+| **Liquidity Commitment** | ⚠️ PENDING | Requires LP lock registry contract (not yet deployed on X1 testnet) | 150 |
+| **Team Transparency** | ⚠️ PENDING | Requires team verification registry (not yet deployed on X1 testnet) | 50 |
+| **Fair Launch Pledge** | ⚠️ PENDING | Requires pledge registry contract (not yet deployed on X1 testnet) | 50 |
 
-**Current score tiers (planned):**
-
-- 0–199     Unverified (⚠️ High risk)  
-- 200–349   Emerging Builder  
-- 350–499   Verified Builder  
-- 500+      Exemplar
+> 🔒 **Zero Fabrication Policy**  
+> We NEVER fabricate verification results. Pending pillars show transparent disclosure:  
+> *"❌ LP Lock verification requires registry contract (not deployed)"*  
+> This protects builder credibility — grant reviewers can verify every claim on-chain.
 
 ## Current Status
 
-🟡 **Early design & specification stage** (February 2026)
+🟢 **Working Prototype on X1 Testnet** (February 2026)
 
-- Protocol standard published  
-- Static landing page live  
-- Smart contracts, ZK verifier, Ethoscan scoring engine
+- ✅ Real Gnosis Safe detection deployed and operational
+- ✅ Transparent frontend with authentic matrix background
+- ✅ Honest UI disclosure of verification limitations
+- ⚠️ LP/Team/Pledge registries pending deployment (see Upgrade Path below)
+- ⚠️ $ETHOS token not yet minted (see Tokenomics section)
 
-## Planned Tech Stack
+## How Verification Works Today
 
-- Chain: Base (low-cost optimistic rollup)  
-- Smart contracts: Solidity  
-- ZK proofs: circom / noir (TBD)  
-- Frontend: Next.js / React / wagmi  
-- Indexing: The Graph or custom event indexing  
-- Off-chain components: minimal, privacy-first
+### Treasury Transparency (250 pts) — REAL ON-CHAIN CHECK
+1. **Bytecode pattern matching**: Scans contract bytecode for Gnosis Safe v1.3.0 signature
+2. **Owner count verification**: Calls `getOwners()` to confirm ≥3 signers
+3. **Scoring**:
+   - ✅ 250 pts: Gnosis Safe with ≥3 owners
+   - ⚠️ 200 pts: Gnosis Safe with <3 owners (partial credit)
+   - ❌ 0 pts: EOA wallet or non-Gnosis contract
 
-## How to Contribute
+### Other Pillars — TRANSPARENT DISCLOSURE (NO FABRICATION)
+- ❌ Shows clear message: *"registry contract not deployed"*
+- ❌ Awards 0 points (no fabricated results)
+- ✅ Documents upgrade path when registries are deployed
 
-1. Read [GENESIS_STANDARD.md](./GENESIS_STANDARD.md)  
-2. Open an issue or discussion with your idea  
-3. Submit small, focused pull requests
+## Upgrade Path to Full 500/500 Verification
 
-We especially welcome help with:
-- Smart contract design & security patterns
-- ZK circuit ideas
-- Documentation & diagrams
-- Test ideas & edge cases
+| Step | Action | Timeline |
+|------|--------|----------|
+| 1 | Deploy LP Lock Registry contract | Ready to deploy now |
+| 2 | Deploy Team Verification Registry contract | Ready to deploy now |
+| 3 | Deploy Fair Launch Pledge Registry contract | Ready to deploy now |
+| 4 | Register builder wallets in all registries | Post-deployment |
+| 5 | Update verifier.js with registry addresses | 5-minute update |
 
-## 2026 Roadmap – Early Targets
+> 💡 **No redeployment needed** — registries are independent contracts. Updating verifier.js with new addresses activates full 500/500 scoring.
 
-**Q1**  
-- Solidity contracts: TrustScoreNFT (soulbound), verification registry  
-- Basic Ethoscan scoring logic (on-chain behavior signals)  
-- Improved documentation & formal spec
-
-**Q2**  
-- ZK proof integration (privacy-preserving checks)  
-- Public testnet deployment  
-- Builder beta application flow
-
-# $ETHOS Tokenomics
+## $ETHOS Tokenomics (PLANNED — NOT YET DEPLOYED)
 
 **Total Supply**: 100,000,000 $ETHOS (fixed – no inflation)
 
 **Purpose**  
-$ETHOS powers the EthosiFi protocol. Every verification burns tokens permanently, creating scarcity as adoption and trust grow. The token aligns incentives between builders, users, and the ecosystem.
+$ETHOS will power the EthosiFi protocol. Every verification will burn tokens permanently, creating scarcity as adoption grows.
 
 **Allocation Breakdown**
 
-| Allocation                | Percentage | Amount         | Unlock / Vesting Details                                      | Purpose |
-|---------------------------|------------|----------------|---------------------------------------------------------------|---------|
-| Verification Rewards Pool | 40%        | 40,000,000     | Non-transferable credits distributed to early adopters<br>100 $ETHOS burned per verification redemption | Direct deflation tied to real usage |
-| Protocol Treasury         | 20%        | 20,000,000     | Controlled by Gnosis Safe multi-sig<br>Milestone & DAO governed (post-mainnet) | Development, audits, security, grants, X1 partnerships |
-| Core Team                 | 20%        | 20,000,000     | 10% (10,000,000) unlocked at TGE<br>10% (10,000,000) vested linearly over 36 months with 6-month cliff | Immediate runway + long-term alignment |
-| Ecosystem Growth          | 10%        | 10,000,000     | Released via grants, incentives, builder rewards, partnerships | Accelerates adoption & network effects |
-| Early Contributor Round   | 5%         | 5,000,000      | Fully unlocked at TGE<br>Sold at fixed price to early supporters (capped round) | Rewards early belief, replaces part of public allocation |
-| Public Launch             | 5%         | 5,000,000      | Fully unlocked at TGE<br>Transparent distribution (no pre-sales, no insider advantage) | Open access for community at launch |
+| Allocation | Percentage | Amount | Status |
+|------------|------------|--------|--------|
+| Verification Rewards Pool | 40% | 40,000,000 | ⚠️ Not deployed — will issue non-transferable vouchers |
+| Protocol Treasury | 20% | 20,000,000 | ⚠️ Not deployed — controlled by Gnosis Safe (planned) |
+| Core Team | 20% | 20,000,000 | ⚠️ Not deployed — vesting schedule planned |
+| Ecosystem Growth | 10% | 10,000,000 | ⚠️ Not deployed |
+| Early Contributor Round | 5% | 5,000,000 | ⚠️ Not deployed |
+| Public Launch | 5% | 5,000,000 | ⚠️ Not deployed |
 
-**Core Economic Mechanism**  
-- Builders pay 100 $ETHOS to verify → 100% of fee is **permanently burned**  
-- 10,000 verifications = 1,000,000 $ETHOS destroyed (1% of total supply)  
-- 400,000 verifications = full 40% pool burned (40% supply reduction)  
-- Scarcity scales directly with real protocol usage and ecosystem trust
+> ⚠️ **Critical Disclosure**  
+> $ETHOS token contract has **NOT YET BEEN DEPLOYED** to X1 testnet.  
+> Token gating is **NOT ACTIVE** in current prototype.  
+> All verification is currently **free and permissionless**.  
+> Token deployment requires explicit authorization (see Security section below).
 
-**Vesting Details**  
-- No vesting on public launch, early contributor round, or verification pool  
-- Treasury unlocks are milestone-based and multi-sig controlled  
-- Team vesting uses standard linear vesting contract with 6-month cliff followed by monthly unlocks over 36 months
+## Security & Credibility Commitments
 
-**Why this structure is aligned & sustainable**  
-- 40% of supply is deflationary by design  
-- Team has meaningful skin in the game but long-term lockup  
-- No pre-mined VC/insider dumps  
-- Ecosystem & public portions ensure broad distribution  
-- Burn flywheel creates value accrual as trust grows
+### What We Will NEVER Do
+- ❌ Fabricate LP lock data ("mockLpLock = { locked: true }")
+- ❌ Hardcode "verified" team addresses without on-chain proof
+- ❌ Claim fake pledge status ("hasPledge = true" without registry)
+- ❌ Hide verification limitations behind marketing language
+- ❌ Deploy token contract without explicit written authorization
 
-EthosiFi is built to make ethical behavior profitable and scams the expensive outlier.
-## Contact & Follow
+### What We DO
+- ✅ Show real Gnosis Safe verification via bytecode pattern matching
+- ✅ Transparently disclose all limitations in UI and documentation
+- ✅ Provide upgrade path when X1 deploys native primitives
+- ✅ Protect builder credibility through radical honesty
 
-- Twitter: [@EthosiFi](https://twitter.com/EthosiFi)  
-- ENS: ethosifi.eth
-- Discussion: GitHub Issues / Discussions
+## How to Use the Current Prototype
 
-Building the immune system for Web3 — one verifiable signal at a time.
+### Local Development
+```bash
+# Install local web server (one time)
+npm install -g http-server
 
-</div>
+# Serve files
+cd ~/ethosifi-x1
+http-server -p 8080
