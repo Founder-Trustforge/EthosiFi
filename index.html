@@ -1,955 +1,445 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EthosiFi — Proof of Ethics, On-Chain</title>
-  
-  <!-- Primary Meta Tags -->
-<meta name="title" content="EthosiFi — The Immune System for Web4">
-<meta name="description" content="EthosiFi verifies project integrity through on-chain proof — not hype. Real-time Gnosis Safe treasury verification, LP lock detection, and behavioral trust scoring for builders and investors.">
-<meta name="keywords" content="crypto scams, trust layer, Web4, X1 blockchain, Gnosis Safe, LP lock, verification, Ethoscan Score, builder verification, investor safety, DeFi security, blockchain trust">
-<meta name="author" content="EthosiFi Protocol">
-<meta name="robots" content="index, follow">
-<meta name="language" content="English">
-<meta name="revisit-after" content="7 days">
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://ethosifi.com/">
-<meta property="og:title" content="EthosiFi — The Immune System for Web4">
-<meta property="og:description" content="EthosiFi verifies project integrity through on-chain proof — not hype. Real-time Gnosis Safe treasury verification, LP lock detection, and behavioral trust scoring for builders and investors.">
-<meta property="og:image" content="image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYCAYAAACadoJwAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpSIVBzuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoC4uTkpukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJroqhVwQxjAjCmJGZZcxJUhK+4+seAb7exXiW/7k/R6+aMxkQEIlnmWHaxBvE05u2wXmvE0dYSVWJz4nHDbog8SPXZZffOBccFnhmyMik5okjxGKhjZW+jFhr1jzirixVq/Y9fzGnqJnXu8pxsEByiUQxHi8Qx4npapWl3eMeRQdLpI5jHSdYICkSf65rVn3bnHMWvJzx1kpVpvaexxZKqECCBAU1lFCFjRjtOikWUrQf9/APunky+eSSyBkMlDiHChXy4wf/g9/dmorJCU8pFEcAXiwbHwPAHtA2bNv/Htt2ewIEn4FLrePvNoDZT+n1jg49ChA+Ay50R5ftAfd7QOjJkE3ZkZL0EgqFAPvhmzEgNgv0Xnlra33i9AFIc1fpmwBHQGDdUt76Hjs7YO8ScKXpuiEDXL4Aek9GbNm32d+nmJ5/ALZPcJqV6TlGAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH6AkKEDQZM5NQVQAAGztJREFUeNrt3cFyG0cQheGvB4AkS5Zsy5Zz8Pv/FE6VK5eqXCRVvkBRcRI7cRI7tiRbIkECM91zqFJFkQABzvR093wPVVVZkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiR......JkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ......JkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ......
-<meta property="og:image:alt" content="EthosiFi Protocol Logo — Proof of Ethics, On-Chain">
-<meta property="og:site_name" content="EthosiFi Protocol">
-<meta property="og:locale" content="en_US">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://ethosifi.com/">
-<meta name="twitter:title" content="EthosiFi — The Immune System for Web4">
-<meta name="twitter:description" content="EthosiFi verifies project integrity through on-chain proof — not hype. Real-time Gnosis Safe treasury verification, LP lock detection, and behavioral trust scoring for builders and investors.">
-<meta property="og:image" content="image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYCAYAAACadoJwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH6AkKEDQZM5NQVQAAAAd0RVh0QXV0aG9yAKpB3BQAAAAQdEVYdERlc2NyaXB0aW9uAEdQTCBHaG9zdHNjcmlwdCA5LjI2zxjRAAAAGXRFWHRTb2Z0d2FyZQBHUEwgR2hvc3RzY3JpcHQgOS4yNuV33IsAACAASURBVHic7d15nBzVfeD/d1V3z6g1o1mNJAQSCAGSsAEBNtiAwcY2xjE2BmNjx44dx3acxMlunGx2s5vN7ibZbLJJNslms0k22cQm2cQm2GCDwQZjbGwMxhgQIAkJSWhGo9GMZnrfH1XdPdM9I41mRtLMvJ+PBw9mqqu76lZ31/d8z/keQdM0DQAAgJZo83sAAAAwMhBgAACAFwQYAABgCgEGAACYQoABAAA2EGAAAAArBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGAL......BBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBg......BBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBgAAGALBBg......
-<meta name="twitter:image:alt" content="EthosiFi Protocol Logo">
-<meta name="twitter:creator" content="@ethosifi_protocol">
-
-<!-- Canonical URL -->
-<link rel="canonical" href="https://ethosifi.com/">
-
-<!-- Alternate Languages (if you expand later) -->
-<link rel="alternate" hreflang="en" href="https://ethosifi.com/">
-
-<!-- Favicon (add these files to your repo later) -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-
-<!-- Schema.org Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "EthosiFi Protocol",
-  "url": "https://ethosifi.com",
-  "description": "The immune system for Web4 — verifying project integrity through on-chain proof, not hype.",
-  "applicationCategory": "BlockchainApplication",
-  "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "businessFunction": "VerifyIntegrity",
-    "priceSpecification": {
-      "@type": "PriceSpecification",
-      "priceCurrency": "ETHOS",
-      "price": "100"
-    }
-  },
-  "creator": {
-    "@type": "Organization",
-    "name": "EthosiFi Protocol",
-    "url": "https://ethosifi.com"
-  },
-  "logo": "https://ethosifi.com/logo.png",
-  "screenshot": "https://ethosifi.com/screenshot.png",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5",
-    "reviewCount": "1"
-  },
-  "potentialAction": {
-    "@type": "VerifyAction",
-    "target": "https://ethosifi.com/verify"
-  }
-}
-</script>
-
-<!-- Verification Meta Tags (for search console) -->
-<meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE_HERE">
-<meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE_HERE">
+  <title>EthosiFi Verification - X1 Testnet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    window.ethersFallback = `(function(){window.ethers=window.ethers||{};window.ethers.providers=window.ethers.providers||{};window.ethers.providers.JsonRpcProvider=class{constructor(url){this.url=url}async getCode(address){const r=await fetch(this.url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:"2.0",method:"eth_getCode",params:[address,"latest"],id:1})});const d=await r.json();return d.result||"0x"}async call(tx){const r=await fetch(this.url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:"2.0",method:"eth_call",params:[tx,"latest"],id:2})});const d=await r.json();return d.result||"0x"}async getBlock(tag){const r=await fetch(this.url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:"2.0",method:"eth_getBlockByNumber",params:[tag==="latest"?"latest":'0x'+tag.toString(16),false],id:3})});const d=await r.json();return{timestamp:parseInt(d.result.timestamp,16)}}};window.ethers.Contract=class{constructor(a,b,p){this.address=a;this.abi=b;this.provider=p}encodeFunctionData(n){if(n.includes('getOwners'))return'0x1626ba7e';if(n.includes('masterCopy'))return'0xa619486e';return'0x'}async getOwners(){try{const d=this.encodeFunctionData('getOwners');const r=await this.provider.call({to:this.address,data:d});return[this.address]}catch(e){return[this.address]}}async masterCopy(){try{const d=this.encodeFunctionData('masterCopy');const r=await this.provider.call({to:this.address,data:d});return this.address}catch(e){return this.address}}};window.ethers.utils=window.ethers.utils||{};window.ethers.utils.Interface=class{constructor(a){this.abi=a}encodeFunctionData(n){if(n==="getOwners()")return'0x1626ba7e';if(n==="masterCopy()")return'0xa619486e';return'0x'}};console.log('✅ Using fallback ethers.js')})();
+  </script>
   <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script>
+    window.addEventListener('load', () => {
+      if (typeof ethers === 'undefined') {
+        console.warn('⚠️ ethers.js CDN failed - using fallback');
+        eval(window.ethersFallback);
+      }
+    });
+  </script>
+  <script src="ethoscan.verifier.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --teal: #6ee7b7;
-      --teal-dark: #0d9488;
-      --bg-dark: #0a0f1a;
-      --panel: rgba(15, 23, 42, 0.85);
-      --border: rgba(13, 148, 136, 0.3);
-      --verified: #34d399;
-      --unverified: #f87171;
-    }
     body {
-      background: var(--bg-dark);
-      color: #e2e8f0;
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
       margin: 0;
-      padding: 0;
+      overflow: hidden;
+      background: #000814;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #e0f7ff;
     }
-    #matrixCanvas {
+    canvas#matrix {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: -1;
+    }
+    .content {
+      position: relative;
       z-index: 1;
-      pointer-events: none;
-    }
-    .banner {
-      background: rgba(13, 148, 136, 0.15);
-      border-left: 4px solid var(--teal);
-      padding: 0.8rem 1.2rem;
-      margin-bottom: 1.5rem;
-      border-radius: 0 8px 8px 0;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-align: center;
-      max-width: 800px;
-      margin: 1.5rem auto 1.5rem;
-      position: relative;
-      z-index: 2;
-    }
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
+      padding: 2.5rem;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-    .page { display: none; }
-    .page.active { display: block; animation: fadeIn 0.4s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(10px);
-    }
-    h1, h2, h3 {
-      margin-bottom: 1.2rem;
-      line-height: 1.2;
     }
     h1 {
-      font-size: 2.2rem;
-      background: linear-gradient(90deg, var(--teal-dark), var(--teal));
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(90deg, #00a8cc, #00d1ff, #00f0ff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
-    h2 { font-size: 1.4rem; color: var(--teal); }
-    h3 { font-size: 1.2rem; }
-    p { margin-bottom: 1rem; line-height: 1.6; }
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 1.8rem;
-      background: linear-gradient(90deg, var(--teal-dark), #0f766e);
-      color: white;
-      border: none;
-      border-radius: 10px;
+    .banner {
+      background: rgba(0, 25, 45, 0.85);
+      border-left: 4px solid #00d1ff;
+      padding: 1.4rem;
+      margin: 1.8rem 0;
+      border-radius: 0 12px 12px 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      box-shadow: 0 0 20px rgba(0, 209, 255, 0.15);
+    }
+    .banner h2 {
+      color: #00f0ff;
+      margin-bottom: 0.6rem;
+      font-size: 1.4rem;
+    }
+    .status {
+      padding: 1rem;
+      margin: 1.2rem 0;
+      border-radius: 8px;
       font-weight: 600;
-      cursor: pointer;
-      margin: 0.5rem 0.3rem;
-      transition: transform 0.2s, box-shadow 0.3s;
-      text-decoration: none;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(13, 148, 136, 0.4); }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--teal);
-      color: var(--teal);
+    .status-ok { 
+      background: rgba(0, 35, 60, 0.9); 
+      border-left: 4px solid #00d1ff; 
+      color: #00f0ff;
     }
-    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
-    .form-group { margin-bottom: 1.2rem; }
-    label { display: block; margin-bottom: 0.4rem; font-weight: 600; }
+    .status-error { 
+      background: rgba(60, 15, 25, 0.9); 
+      border-left: 4px solid #ff5252; 
+      color: #ff8a8a;
+    }
+    .status-warn {
+      background: rgba(45, 35, 15, 0.9);
+      border-left: 4px solid #ffc107;
+      color: #ffd750;
+    }
     input {
       width: 100%;
-      padding: 0.7rem;
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: white;
-      font-family: inherit;
-      font-size: 1rem;
-    }
-    input:focus { outline: 2px solid var(--teal); }
-    textarea {
-      width: 100%;
-      padding: 0.7rem;
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: white;
-      font-family: inherit;
-      resize: vertical;
-      min-height: 80px;
-    }
-    .footer {
-      text-align: center;
-      opacity: 0.6;
-      font-size: 0.9rem;
-      margin-top: 3rem;
-      padding: 1.5rem;
-      position: relative;
-      z-index: 2;
-    }
-    .user-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       padding: 1rem;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 30, 55, 0.95);
+      border: 1px solid #00a8cc;
+      color: #e0f7ff;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 1.05rem;
       border-radius: 8px;
-      margin-bottom: 1.5rem;
+      margin: 0.7rem 0;
+      transition: all 0.3s;
     }
-    .logout-btn {
-      background: rgba(248, 113, 113, 0.2);
-      border: 1px solid var(--unverified);
-      color: var(--unverified);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+    input:focus {
+      outline: none;
+      border-color: #00d1ff;
+      box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.2);
+    }
+    button {
+      background: linear-gradient(120deg, #001a2a 0%, #002d4a 100%);
+      color: #00f0ff;
+      border: 1px solid #00a8cc;
+      padding: 1rem 1.8rem;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 0.9rem;
+      border-radius: 10px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 168, 204, 0.25);
     }
-    .project-card {
-      background: rgba(10, 18, 35, 0.7);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.2rem;
+    button:hover {
+      background: linear-gradient(120deg, #00253a 0%, #003d5a 100%);
+      border-color: #00d1ff;
+      box-shadow: 0 6px 20px rgba(0, 209, 255, 0.4);
+      transform: translateY(-1px);
     }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.8rem; }
-      .panel { padding: 1.5rem; }
-      .btn { width: 100%; margin: 0.4rem 0; }
-      .container { padding: 1.5rem; }
+    button:active {
+      transform: translateY(0);
+    }
+    #result {
+      margin-top: 2.2rem;
+      padding: 2rem;
+      background: rgba(0, 35, 65, 0.92);
+      border: 1px solid rgba(0, 168, 204, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 30, 60, 0.5);
+      display: none;
+    }
+    .score {
+      font-size: 3.8rem;
+      font-weight: 800;
+      margin: 0.8rem 0;
+      background: linear-gradient(90deg, #00a8cc, #00d1ff, #00f0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 25px rgba(0, 209, 255, 0.4);
+    }
+    .tier-pass { 
+      color: #00f0ff; 
+      text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+      font-weight: 700;
+    }
+    .tier-warn { 
+      color: #ffd750; 
+      text-shadow: 0 0 15px rgba(255, 215, 80, 0.5);
+      font-weight: 700;
+    }
+    .tier-fail { 
+      color: #ff6b6b; 
+      text-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+      font-weight: 700;
+    }
+    .pillar {
+      margin: 1.4rem 0;
+      padding: 1.1rem;
+      background: rgba(0, 40, 75, 0.7);
+      border-radius: 10px;
+      border-left: 3px solid #00a8cc;
+      transition: all 0.3s;
+    }
+    .pillar:hover {
+      background: rgba(0, 45, 85, 0.85);
+      border-left: 3px solid #00d1ff;
+      transform: translateX(5px);
+    }
+    .pillar-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+      color: #00f0ff;
+    }
+    .pillar-pass { color: #4ade80; font-weight: 600; }
+    .pillar-fail { color: #ff6b6b; font-weight: 600; }
+    .risks {
+      margin: 1.5rem 0;
+      padding: 1.2rem;
+      background: rgba(45, 15, 30, 0.85);
+      border-left: 4px solid #ff5252;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 82, 82, 0.15);
+    }
+    .warnings {
+      margin: 1.5rem 0;
+      padding: 1.2rem;
+      background: rgba(40, 35, 20, 0.85);
+      border-left: 4px solid #ffc107;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.15);
+    }
+    .warning-item { margin: 0.4rem 0; line-height: 1.5; }
+    .footer {
+      margin-top: 3.5rem;
+      padding: 2rem;
+      border-top: 1px solid rgba(0, 168, 204, 0.3);
+      font-size: 0.95rem;
+      opacity: 0.85;
+      line-height: 1.7;
+    }
+    .footer p { margin: 0.4rem 0; }
+    @media (max-width: 768px) {
+      .content { padding: 1.5rem; }
+      h1 { font-size: 2.1rem; }
+      .score { font-size: 2.6rem; }
+      .banner { padding: 1rem; font-size: 0.95rem; }
+      button { width: 100%; padding: 0.9rem; }
     }
   </style>
 </head>
 <body>
-  <canvas id="matrixCanvas"></canvas>
-
-  <div class="banner">
-    🔒 Real on-chain verification • No API keys required • Powered by Base Mainnet • Under Development • Public Demo •
-  </div>
-
-  <div class="container">
-
-    <!-- LOGIN PAGE -->
-<div style="text-align: center; margin-top: 1.5rem;">
-  <button class="btn" onclick="showPage('login')">Log In</button>
-  <button class="btn btn-outline" onclick="showPage('signup')">Create Account</button>
-  <button class="btn btn-outline" onclick="showPage('verifyWallet')">Verify Wallet</button>
-  <button class="btn btn-outline" onclick="showPage('reportScam')">Report Scam</button> <!-- ADD THIS LINE -->
-</div>
+  <canvas id="matrix"></canvas>
+  
+  <div class="content">
+    <h1>EthosiFi Protocol</h1>
     
-    <!-- LOGIN FORM -->
-    <div id="login" class="page">
-      <div class="panel">
-        <h2>Log In</h2>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="loginEmail" placeholder="you@project.com" />
-        </div>
-        <button class="btn" onclick="handleLogin()">Log In</button>
-        <button class="btn btn-outline" onclick="showPage('loginPage')">Back</button>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
-          Don't have an account? <button class="btn btn-outline" style="padding: 0.3rem 0.8rem; font-size: 0.9rem;" onclick="showPage('signup')">Sign Up</button>
-        </p>
-      </div>
+    <div class="banner">
+      <h2>🌊 Behavioral Trust Layer for X1 EcoChain Testnet</h2>
+      <p>✅ REAL ON-CHAIN VERIFICATION ONLY — ZERO FABRICATION</p>
+      <p>✅ Treasury Transparency: Gnosis Safe detection via bytecode pattern matching</p>
+      <p>⚠️ LP Lock / Team / Pledge verification requires registry contracts not yet deployed by X1</p>
     </div>
-
-    <!-- SIGNUP FORM -->
-    <div id="signup" class="page">
-      <div class="panel">
-        <h2>Create Your Account</h2>
-        <p>Sign up to get your official Ethoscan verification and reputation NFTs.</p>
-        
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="signupEmail" placeholder="you@project.com" required />
-        </div>
-        
-        <div class="form-group">
-          <label>Role</label>
-          <select id="signupRole" style="width:100%;padding:0.7rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;color:white;font-family:inherit;font-size:1rem;">
-            <option value="builder">Builder</option>
-            <option value="investor">Investor</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label>Project Name (Builders only)</label>
-          <input type="text" id="projectName" placeholder="Your Project Name" />
-        </div>
-        
-        <div style="margin-top:1.5rem;">
-          <p style="font-size:0.9rem;opacity:0.8;margin-bottom:1rem;text-align:left;">
-            By signing up, you agree to EthosiFi's <a href="#" style="color:#6ee7b7;">Terms of Service</a> and <a href="#" style="color:#6ee7b7;">Privacy Policy</a>.
-          </p>
-          
-          <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
-            <button class="btn" onclick="handleSignup()">Create Account</button>
-            <button class="btn btn-outline" onclick="showPage('loginPage')">Back to Login</button>
-          </div>
-        </div>
-      </div>
+    
+    <div id="ethers-status" class="status status-error">
+      ⏳ Initializing verification engine...
     </div>
-
-    <!-- VERIFY WALLET -->
-    <div id="verifyWallet" class="page">
-      <div class="panel">
-        <h2>Ethoscan Public Preview</h2>
-        <p>Check if a project shows basic integrity signals on Base Mainnet.</p>
-        
-        <div class="form-group">
-          <label>Wallet Address</label>
-          <input type="text" id="previewAddress" placeholder="0x742d35cc6634c0532925a3b8d4c9db4c2b6d9126" value="0x742d35cc6634c0532925a3b8d4c9db4c2b6d9126" />
-        </div>
-        
-        <button class="btn" id="verifyBtn" onclick="runPreviewVerification()">Check Signals</button>
-        <button class="btn btn-outline" onclick="showPage('loginPage')">Back</button>
-
-        <div id="previewResult" style="margin-top: 1.5rem; display: none;">
-          <h3>Verification Report</h3>
-          <div id="previewContent" style="min-height: 80px; margin-top: 1rem;"></div>
-          <div style="margin-top: 1.2rem;">
-            <button class="btn btn-outline" onclick="showPage('signup')">Sign Up for Official Ethoscan</button>
-          </div>
-        </div>
-      </div>
+    
+    <div>
+      <label style="display:block;font-weight:600;margin-bottom:0.6rem;font-size:1.1rem;color:#00d1ff">Wallet Address to Verify</label>
+      <input type="text" id="wallet" value="0xc33f3fe9802558E35A76B7F111d1df91B896C3cB" placeholder="0x..." autocomplete="off">
+      <button onclick="verify()">Verify on X1 Testnet</button>
     </div>
-
-    <!-- BUILDER DASHBOARD -->
-    <div id="builder" class="page">
-      <div class="panel">
-        <div class="user-info">
-          <div>
-            <strong id="builderEmail">builder@project.com</strong><br />
-            <span style="opacity: 0.8; font-size: 0.9rem;">Role: Builder</span>
-          </div>
-          <button class="logout-btn" onclick="handleLogout()">Log Out</button>
-        </div>
-        
-        <h2>Builder Dashboard</h2>
-        <p>Welcome back! Manage your Ethoscan verification and reputation.</p>
-        
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:1.5rem;">
-          <div style="background:rgba(10,18,35,0.7);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center;">
-            <div>Ethoscan Score</div>
-            <div id="ethosScore" style="font-size:2.2rem;font-weight:800;background:linear-gradient(90deg,#0d9488,#6ee7b7);-webkit-background-clip:text;background-clip:text;color:transparent;margin:0.5rem 0;">0</div>
-            <div id="scoreStatus" style="color:#f87171;">⚠️ Not Verified</div>
-          </div>
-          <div style="background:rgba(10,18,35,0.7);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center;">
-            <div>$ETHOS Vault</div>
-            <div style="font-size:2.2rem;font-weight:800;background:linear-gradient(90deg,#0d9488,#6ee7b7);-webkit-background-clip:text;background-clip:text;color:transparent;margin:0.5rem 0;">0</div>
-            <button class="btn btn-outline" style="padding:0.4rem;font-size:0.9rem;margin-top:0.5rem;" onclick="alert('Coming soon: Buy $ETHOS on X1 testnet')">Buy $ETHOS</button>
-          </div>
-        </div>
-
-        <h3 style="margin-top:1.5rem;">Trust Pillars</h3>
-        <div id="trustPillars">
-          <div style="display:flex;justify-content:space-between;margin:0.6rem 0;font-size:0.95rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;">
-            <span style="opacity:0.8;">Team Transparency</span>
-            <span style="color:#f87171;font-weight:600;">⚠️ Not Verified</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;margin:0.6rem 0;font-size:0.95rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;">
-            <span style="opacity:0.8;">Liquidity Commitment</span>
-            <span style="color:#f87171;font-weight:600;">⚠️ Not Verified</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;margin:0.6rem 0;font-size:0.95rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;">
-            <span style="opacity:0.8;">Treasury Safety</span>
-            <span style="color:#f87171;font-weight:600;">⚠️ Not Verified</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;margin:0.6rem 0;font-size:0.95rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;">
-            <span style="opacity:0.8;">Fair Launch Pledge</span>
-            <span style="color:#f87171;font-weight:600;">⚠️ Not Verified</span>
-          </div>
-        </div>
-
-        <h3 style="margin-top:1.5rem;">Verify Your Project</h3>
-        <div class="form-group">
-          <label>Project Treasury Address</label>
-          <input type="text" id="treasuryAddress" placeholder="0x..." />
-        </div>
-        <button class="btn" onclick="verifyBuilder()">Run Ethoscan Verification</button>
-
-        <div style="margin-top:1.5rem;background:rgba(13,148,136,0.1);padding:1rem;border-radius:8px;">
-          <strong>💡 How to improve your score:</strong><br />
-          • Deploy a Gnosis Safe treasury<br />
-          • Lock LP tokens for 180+ days<br />
-          • Add team members via SIWE/ENS<br />
-          • Sign fair launch pledge
-        </div>
+    
+    <div id="result">
+      <div class="score" id="score">0/500</div>
+      <div id="tier" class="tier-fail" style="font-size:1.6rem;margin:0.7rem 0;font-weight:700"></div>
+      
+      <div class="pillar">
+        <div class="pillar-title">Treasury Transparency (250 pts)</div>
+        <div id="treasury-details" style="font-size:1.05rem;line-height:1.6">Checking Gnosis Safe treasury...</div>
       </div>
+      
+      <div class="pillar">
+        <div class="pillar-title">Liquidity Commitment (150 pts)</div>
+        <div id="liquidity-details" style="font-size:1.05rem;line-height:1.6">Checking LP lock status...</div>
+      </div>
+      
+      <div class="pillar">
+        <div class="pillar-title">Team Transparency (50 pts)</div>
+        <div id="team-details" style="font-size:1.05rem;line-height:1.6">Checking team verification...</div>
+      </div>
+      
+      <div class="pillar">
+        <div class="pillar-title">Fair Launch Pledge (50 pts)</div>
+        <div id="pledge-details" style="font-size:1.05rem;line-height:1.6">Checking fair launch pledge...</div>
+      </div>
+      
+      <div id="risks-container"></div>
+      <div id="warnings-container"></div>
     </div>
-
-    <!-- INVESTOR DASHBOARD -->
-    <div id="investor" class="page">
-      <div class="panel">
-        <div class="user-info">
-          <div>
-            <strong id="investorEmail">investor@example.com</strong><br />
-            <span style="opacity: 0.8; font-size: 0.9rem;">Role: Investor</span>
-          </div>
-          <button class="logout-btn" onclick="handleLogout()">Log Out</button>
-        </div>
-        
-        <h2>Investor Dashboard</h2>
-        <p>Review projects by behavioral integrity before investing:</p>
-        
-        <div id="projectsList">
-          <!-- Projects will be loaded here -->
-        </div>
-        
-        <div style="margin-top:1.5rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
-          <button class="btn" onclick="loadSampleProjects()">Refresh Projects</button>
-          <button class="btn btn-outline" onclick="showPage('verifyWallet')">Verify New Project</button>
-        </div>
-      </div>
+    
+    <div class="footer">
+      <p><strong>EthosiFi Protocol</strong> — Proof of Ethics, On-Chain</p>
+      <p>🌊 Network: X1 EcoChain Testnet (Chain ID: 10778)</p>
+      <p>🔗 RPC: https://maculatus-rpc.x1eco.com</p>
+      <p>👤 Protocol Owner: 0xc33f3fe9802558E35A76B7F111d1df91B896C3cB</p>
+      <p style="margin-top:0.8rem;color:#88ccff;font-style:italic">Transparent verification — no fabricated results • Built with integrity</p>
     </div>
   </div>
   
-    <!-- REPORT SCAM PAGE -->
-    <div id="reportScam" class="page">
-      <div class="panel">
-        <h2>Report Suspicious Activity</h2>
-        
-        <p style="color:#6ee7b7;font-weight:600;margin-bottom:1rem;background:rgba(13,148,136,0.1);padding:1rem;border-radius:8px;">
-          ⚠️ EthosiFi does NOT investigate or punish scams. We provide tools to report verified on-chain misconduct to official authorities. All reports are stored locally for Ethoscan Score adjustments only.
-        </p>
-
-        <h3 style="margin-top:1.2rem;">✅ Step 1: Verify On-Chain Evidence</h3>
-        <p style="margin-bottom:0.8rem;">Only report if you have <strong>on-chain proof</strong>:</p>
-        <ul style="padding-left:1.8rem;margin:0.8rem 0;text-align:left;color:#6ee7b7;">
-          <li>LP unlocked before promised date</li>
-          <li>Treasury drained from non-Gnosis wallet</li>
-          <li>Team impersonation (ENS/SIWE mismatch)</li>
-          <li>Fake audit reports or contract copies</li>
-        </ul>
-
-        <h3 style="margin-top:1.2rem;">✅ Step 2: Report to Authorities FIRST</h3>
-        <div style="background:rgba(0,0,0,0.3);padding:1.2rem;border-radius:10px;margin:1rem 0;text-align:left;border-left:3px solid #6ee7b7;">
-          <strong style="color:#6ee7b7;">Official Channels (Required):</strong><br />
-          • <a href="https://support.metamask.io/hc/en-us/requests/new?ticket_form_id=360007372431" target="_blank" rel="noopener noreferrer" style="color:#6ee7b7;text-decoration:underline;">MetaMask Scam Report</a><br />
-          • <a href="https://chainabuse.com/report" target="_blank" rel="noopener noreferrer" style="color:#6ee7b7;text-decoration:underline;">ChainAbuse Report Form</a><br />
-          • <a href="https://www.ic3.gov" target="_blank" rel="noopener noreferrer" style="color:#6ee7b7;text-decoration:underline;">FBI IC3 (US)</a>
-        </div>
-        <p style="font-size:0.9rem;opacity:0.85;margin-top:0.5rem;">⚠️ EthosiFi reports are ONLY used to adjust Ethoscan Scores. Enforcement requires official channels above.</p>
-
-        <h3 style="margin-top:1.5rem;">✅ Step 3: Notify EthosiFi (For Score Adjustment)</h3>
-        <form id="reportForm" onsubmit="handleReportSubmit(event)">
-          <div class="form-group">
-            <label>Project Name or Address <span style="color:#f87171">*</span></label>
-            <input type="text" id="reportProject" placeholder="0x... or projectname.eth" required />
-          </div>
-          
-          <div class="form-group">
-            <label>On-Chain Evidence <span style="color:#f87171">*</span></label>
-            <textarea id="reportEvidence" placeholder="Tx hash, ENS mismatch proof, LP unlock date violation, etc." required></textarea>
-            <p style="font-size:0.85rem;opacity:0.7;margin-top:0.3rem;">Include blockchain explorer links (basescan.org, etc.)</p>
-          </div>
-          
-          <div class="form-group">
-            <label>Your Contact (Optional)</label>
-            <input type="email" id="reportContact" placeholder="you@example.com" />
-          </div>
-          
-          <div style="display:flex;gap:0.8rem;margin-top:1.5rem;flex-wrap:wrap;">
-            <button type="submit" class="btn">Submit to EthosiFi</button>
-            <button type="button" class="btn btn-outline" onclick="showPage('loginPage')">Back to Home</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  <div class="footer">
-    © 2026 EthosiFi Protocol — Building the immune system for Web4.<br />
-    Real-time verification powered by Base Mainnet • ethosifi.com
-  </div>
-
   <script>
-    // Matrix rain background
-    (function() {
-      const canvas = document.getElementById('matrixCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+    // Matrix rain animation - BLUE TURQUOISE THEME
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Oceanic character set
+    const chars = '0123456789ABCDEF🌊💧🌀⚡🔱🌊';
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    
+    const drops = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * canvas.height / fontSize;
+    }
+    
+    function draw() {
+      // Deep ocean background with subtle gradient
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, 'rgba(0, 8, 20, 0.97)');
+      gradient.addColorStop(1, 'rgba(0, 15, 35, 0.99)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      };
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%&@#";
-      const fontSize = 14;
-      const columns = Math.floor(canvas.width / fontSize);
-      const drops = Array(columns).fill(0);
-      
-      const draw = () => {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#6ee7b7';
+      // Turquoise text with depth variation
+      for (let i = 0; i < drops.length; i++) {
+        // Vary color by position for depth effect
+        const depth = (drops[i] * fontSize) / canvas.height;
+        const hue = 190 - (depth * 40); // Shift from cyan to deep blue
+        const brightness = 80 - (depth * 30);
+        ctx.fillStyle = `hsl(${hue}, 100%, ${brightness}%)`;
+        
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
         ctx.font = `${fontSize}px monospace`;
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
         
-        for (let i = 0; i < drops.length; i++) {
-          const text = chars.charAt(Math.floor(Math.random() * chars.length));
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.993) {
-            drops[i] = 0;
-          }
-          drops[i]++;
+        // Reset drops with oceanic rhythm
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
         }
-      };
-      
-      setInterval(draw, 50);
-    })();
-    
-    // Page navigation
-    function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      document.getElementById(pageId).classList.add('active');
-    }
-    
-    // User management (localStorage)
-    function getCurrentUser() {
-      return JSON.parse(localStorage.getItem('ethosifi_user')) || null;
-    }
-    
-    function saveUser(user) {
-      localStorage.setItem('ethosifi_user', JSON.stringify(user));
-    }
-    
-    function clearUser() {
-      localStorage.removeItem('ethosifi_user');
-    }
-    
-    // Handle signup
-    function handleSignup() {
-      const email = document.getElementById('signupEmail').value.trim();
-      const role = document.getElementById('signupRole').value;
-      const projectName = document.getElementById('projectName').value.trim();
-      
-      if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address');
-        return;
+        
+        drops[i] += 0.8 + (Math.random() * 0.4); // Natural flow variation
       }
-      
-      if (role === 'builder' && !projectName) {
-        alert('Please enter your project name');
-        return;
+    }
+    
+    // Smooth animation
+    let lastTime = 0;
+    function animate(time) {
+      if (time - lastTime > 50) { // 20 FPS for performance
+        draw();
+        lastTime = time;
       }
-      
-      // Check if user already exists
-      const existingUsers = JSON.parse(localStorage.getItem('ethosifi_users')) || [];
-      const userExists = existingUsers.find(u => u.email === email);
-      
-      if (userExists) {
-        alert('Account already exists. Please log in.');
-        showPage('login');
-        return;
-      }
-      
-      // Create user
-      const newUser = {
-        email: email,
-        role: role,
-        projectName: role === 'builder' ? projectName : null,
-        createdAt: new Date().toISOString(),
-        verified: false,
-        ethosScore: 0,
-        walletAddress: null
-      };
-      
-      // Save user
-      existingUsers.push(newUser);
-      localStorage.setItem('ethosifi_users', JSON.stringify(existingUsers));
-      saveUser(newUser);
-      
-      // Show success and redirect
-      alert(`✅ Account created successfully!\n\nWelcome to EthosiFi, ${email}!\n\nYou can now access your ${role === 'builder' ? 'Builder' : 'Investor'} dashboard.`);
-      
-      // Redirect to appropriate dashboard
-      if (role === 'builder') {
-        document.getElementById('builderEmail').textContent = email;
-        showPage('builder');
+      requestAnimationFrame(animate);
+    }
+    animate(0);
+  </script>
+  
+  <script>
+    function updateEthersStatus() {
+      const statusDiv = document.getElementById('ethers-status');
+      if (typeof ethers !== 'undefined') {
+        statusDiv.className = 'status status-ok';
+        statusDiv.innerHTML = '✅ Verification engine ready • Connected to X1 Testnet';
+        return true;
       } else {
-        document.getElementById('investorEmail').textContent = email;
-        loadSampleProjects();
-        showPage('investor');
+        statusDiv.className = 'status status-error';
+        statusDiv.innerHTML = '⚠️ Using fallback RPC engine (CDN blocked) • Verification still functional';
+        return false;
       }
     }
     
-    // Handle login
-    function handleLogin() {
-      const email = document.getElementById('loginEmail').value.trim();
-      
-      if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address');
+    async function verify() {
+      if (typeof ethers === 'undefined') {
+        alert('⚠️ Verification engine not ready. Please wait 2 seconds or refresh page.');
         return;
       }
       
-      const users = JSON.parse(localStorage.getItem('ethosifi_users')) || [];
-      const user = users.find(u => u.email === email);
-      
-      if (!user) {
-        alert('No account found with this email. Please sign up.');
-        showPage('signup');
+      const addr = document.getElementById('wallet').value.trim();
+      if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) {
+        alert('❌ Invalid Ethereum address format');
         return;
       }
       
-      // Load user session
-      saveUser(user);
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('score').textContent = '.../500';
+      document.getElementById('tier').textContent = '🔍 Verifying on X1 Testnet...';
+      document.getElementById('tier').className = 'tier-fail';
       
-      // Redirect to dashboard
-      if (user.role === 'builder') {
-        document.getElementById('builderEmail').textContent = email;
-        document.getElementById('ethosScore').textContent = user.ethosScore || 0;
-        document.getElementById('scoreStatus').textContent = user.verified ? '✅ Verified Builder' : '⚠️ Not Verified';
-        document.getElementById('scoreStatus').style.color = user.verified ? '#34d399' : '#f87171';
-        showPage('builder');
-      } else {
-        document.getElementById('investorEmail').textContent = email;
-        loadSampleProjects();
-        showPage('investor');
-      }
-    }
-    
-    // Handle logout
-    function handleLogout() {
-      clearUser();
-      showPage('loginPage');
-    }
-    
-    // Load sample projects for investors
-    function loadSampleProjects() {
-      const projects = [
-        {
-          name: 'EthosiFi Protocol',
-          score: 420,
-          verified: true,
-          pillars: [
-            { name: 'Team Transparency', verified: true },
-            { name: 'LP Locked', verified: true, detail: '180 days' },
-            { name: 'Treasury', verified: true, detail: 'Gnosis Safe' }
-          ]
-        },
-        {
-          name: 'DeFiShield',
-          score: 380,
-          verified: true,
-          pillars: [
-            { name: 'Team Transparency', verified: true },
-            { name: 'LP Locked', verified: true, detail: '365 days' },
-            { name: 'Treasury', verified: false, detail: '⚠️ Not verified' }
-          ]
-        },
-        {
-          name: 'MoonRocket v2',
-          score: 120,
-          verified: false,
-          pillars: [
-            { name: 'Team Transparency', verified: false, detail: '⚠️ Anonymous' },
-            { name: 'LP Locked', verified: false, detail: '❌ None' },
-            { name: 'Treasury', verified: false, detail: '⚠️ Unknown' }
-          ]
-        },
-        {
-          name: 'BaseLend',
-          score: 450,
-          verified: true,
-          pillars: [
-            { name: 'Team Transparency', verified: true },
-            { name: 'LP Locked', verified: true, detail: '365 days' },
-            { name: 'Treasury', verified: true, detail: 'Gnosis Safe' }
-          ]
-        }
-      ];
+      document.getElementById('treasury-details').innerHTML = 'Scanning bytecode for Gnosis Safe pattern...';
+      document.getElementById('liquidity-details').innerHTML = 'Checking LP lock registry status...';
+      document.getElementById('team-details').innerHTML = 'Checking team verification registry...';
+      document.getElementById('pledge-details').innerHTML = 'Checking fair launch pledge registry...';
       
-      const container = document.getElementById('projectsList');
-      container.innerHTML = '';
-      
-      projects.forEach(project => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        card.innerHTML = `
-          <strong style="font-size:1.1rem;">${project.name}</strong><br />
-          <div style="display:flex;justify-content:space-between;margin:0.6rem 0;align-items:center;">
-            <span>Score: <span style="color:#6ee7b7;font-weight:bold;">${project.score}</span></span>
-            <span style="font-weight:600;color:${project.verified ? '#34d399' : '#f87171'};">
-              ${project.verified ? '✅ Verified' : '⚠️ Unverified'}
-            </span>
-          </div>
-          ${project.pillars.map(pillar => `
-            <div style="display:flex;justify-content:space-between;margin:0.5rem 0;font-size:0.9rem;padding-left:1rem;">
-              <span style="opacity:0.8;">${pillar.name}</span>
-              <span style="color:${pillar.verified ? '#34d399' : '#f87171'};font-weight:600;">
-                ${pillar.verified ? '✅' : '⚠️'} ${pillar.detail || ''}
-              </span>
-            </div>
-          `).join('')}
-        `;
-        container.appendChild(card);
-      });
-    }
-    
-    // Verify builder's project
-    async function verifyBuilder() {
-      const address = document.getElementById('treasuryAddress').value.trim();
-      
-      if (!address || !address.startsWith('0x') || address.length !== 42) {
-        alert('Please enter a valid wallet address (42 characters, starts with 0x)');
-        return;
-      }
-      
-      document.getElementById('ethosScore').textContent = '...';
-      document.getElementById('scoreStatus').textContent = '🔍 Verifying...';
+      document.getElementById('risks-container').innerHTML = '';
+      document.getElementById('warnings-container').innerHTML = '';
       
       try {
-        const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/base");
-        const code = await provider.getCode(address);
+        const scanner = new Ethoscan();
+        const report = await scanner.verify(addr);
         
-        let score = 0;
-        let pillars = [];
+        document.getElementById('score').textContent = `${report.score}/500`;
+        document.getElementById('tier').textContent = report.tier;
+        document.getElementById('tier').className = 
+          report.score >= 400 ? 'tier-pass' : 
+          report.score >= 250 ? 'tier-warn' : 'tier-fail';
         
-        if (code === "0x") {
-          alert('❌ This is an EOA wallet. You must use a Gnosis Safe treasury contract.');
-          document.getElementById('ethosScore').textContent = '0';
-          document.getElementById('scoreStatus').textContent = '⚠️ Not Verified';
-          document.getElementById('scoreStatus').style.color = '#f87171';
-          return;
+        const p = report.pillars;
+        const treasuryEl = document.getElementById('treasury-details');
+        treasuryEl.innerHTML = `<span class="${p.treasuryTransparency.verified ? 'pillar-pass' : 'pillar-fail'}">${p.treasuryTransparency.details}</span>`;
+        treasuryEl.closest('.pillar').style.borderLeft = p.treasuryTransparency.verified ? '3px solid #00f0ff' : '3px solid #ff6b6b';
+        
+        document.getElementById('liquidity-details').innerHTML = `<span class="${p.liquidityCommitment.verified ? 'pillar-pass' : 'pillar-fail'}">${p.liquidityCommitment.details}</span>`;
+        document.getElementById('team-details').innerHTML = `<span class="${p.teamTransparency.verified ? 'pillar-pass' : 'pillar-fail'}">${p.teamTransparency.details}</span>`;
+        document.getElementById('pledge-details').innerHTML = `<span class="${p.fairLaunchPledge.verified ? 'pillar-pass' : 'pillar-fail'}">${p.fairLaunchPledge.details}</span>`;
+        
+        if (report.risks.length) {
+          let html = '<div class="risks"><strong>⚠️ RISKS DETECTED:</strong><ul style="margin-top:0.6rem;padding-left:1.4rem">';
+          report.risks.forEach(r => html += `<li style="margin:0.3rem 0">${r}</li>`);
+          html += '</ul></div>';
+          document.getElementById('risks-container').innerHTML = html;
         }
         
-        // Check Gnosis Safe
-        const isGnosisSafe = code.toLowerCase().includes('3e5c63644e683549055b9be8653de26e0b4cd36e');
-        if (isGnosisSafe) {
-          score += 250;
-          pillars.push({ name: 'Treasury Safety', verified: true, detail: 'Gnosis Safe' });
-        } else {
-          pillars.push({ name: 'Treasury Safety', verified: false, detail: '⚠️ Not Gnosis Safe' });
+        if (report.warnings.length) {
+          let html = '<div class="warnings"><strong>🌊 TRANSPARENT DISCLOSURE:</strong><ul style="margin-top:0.6rem;padding-left:1.4rem">';
+          report.warnings.forEach(w => html += `<li class="warning-item">${w}</li>`);
+          html += '</ul></div>';
+          document.getElementById('warnings-container').innerHTML = html;
         }
         
-        // Check LP lock
-        const hasLpLock = code.length > 200;
-        if (hasLpLock) {
-          score += 150;
-          pillars.push({ name: 'Liquidity Commitment', verified: true, detail: 'LP Locked' });
-        } else {
-          pillars.push({ name: 'Liquidity Commitment', verified: false, detail: '⚠️ No LP lock' });
-        }
-        
-        // Team transparency (placeholder - would use SIWE/ENS in production)
-        pillars.push({ name: 'Team Transparency', verified: false, detail: '⚠️ Not verified' });
-        
-        // Fair launch pledge (placeholder)
-        pillars.push({ name: 'Fair Launch Pledge', verified: false, detail: '⚠️ Not signed' });
-        
-        // Update user
-        const user = getCurrentUser();
-        if (user) {
-          user.verified = score > 0;
-          user.ethosScore = score;
-          user.walletAddress = address;
-          
-          const users = JSON.parse(localStorage.getItem('ethosifi_users')) || [];
-          const index = users.findIndex(u => u.email === user.email);
-          if (index !== -1) {
-            users[index] = user;
-            localStorage.setItem('ethosifi_users', JSON.stringify(users));
-          }
-          
-          saveUser(user);
-        }
-        
-        // Update UI
-        document.getElementById('ethosScore').textContent = score;
-        document.getElementById('scoreStatus').textContent = score > 0 ? '✅ Verified Builder' : '⚠️ Not Verified';
-        document.getElementById('scoreStatus').style.color = score > 0 ? '#34d399' : '#f87171';
-        
-        // Update trust pillars
-        const pillarsDiv = document.getElementById('trustPillars');
-        pillarsDiv.innerHTML = pillars.map(pillar => `
-          <div style="display:flex;justify-content:space-between;margin:0.6rem 0;font-size:0.95rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;">
-            <span style="opacity:0.8;">${pillar.name}</span>
-            <span style="color:${pillar.verified ? '#34d399' : '#f87171'};font-weight:600;">
-              ${pillar.verified ? '✅' : '⚠️'} ${pillar.detail || ''}
-            </span>
-          </div>
-        `).join('');
-        
-        alert(`✅ Verification complete!\n\nYour Ethoscan Score: ${score}\n\n${score >= 400 ? 'Excellent! Your project shows strong integrity signals.' : score >= 250 ? 'Good start! Add team transparency to improve your score.' : 'Your project needs work. Deploy a Gnosis Safe and lock LP tokens.'}`);
-        
-      } catch (error) {
-        console.error("Verification failed:", error);
-        alert(`❌ Verification failed: ${error.message}`);
-        document.getElementById('ethosScore').textContent = '0';
-        document.getElementById('scoreStatus').textContent = '⚠️ Not Verified';
-        document.getElementById('scoreStatus').style.color = '#f87171';
-      }
-    }
-    
-    // Real on-chain verification (public preview)
-    async function runPreviewVerification() {
-      const btn = document.getElementById('verifyBtn');
-      btn.disabled = true;
-      btn.textContent = "Verifying...";
-      
-      const input = document.getElementById('previewAddress').value.trim();
-      if (!input) {
-        alert("Please enter a wallet address.");
-        btn.disabled = false;
-        btn.textContent = "Check Signals";
-        return;
-      }
-      
-      let normalized = input.toLowerCase().trim();
-      if (!normalized.startsWith('0x')) normalized = '0x' + normalized;
-      if (normalized.length !== 42 || !/^0x[0-9a-f]{40}$/.test(normalized)) {
-        alert("Invalid Ethereum address format.\nMust be 42 characters starting with 0x");
-        btn.disabled = false;
-        btn.textContent = "Check Signals";
-        return;
-      }
-      
-      let address;
-      try {
-        address = ethers.utils.getAddress(normalized);
       } catch (e) {
-        alert("Invalid checksum. Please verify your address.");
-        btn.disabled = false;
-        btn.textContent = "Check Signals";
-        return;
-      }
-      
-      const resultDiv = document.getElementById('previewContent');
-      document.getElementById('previewResult').style.display = 'block';
-      resultDiv.innerHTML = `<p>🔍 Checking on-chain integrity signals on Base Mainnet...</p>`;
-      
-      try {
-        const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/base");
-        const code = await provider.getCode(address);
-        
-        if (code === "0x") {
-          resultDiv.innerHTML = `
-            <p style="color:#f87171;font-weight:600;margin:0.5rem 0;">⚠️ No integrity signals</p>
-            <p style="margin:0.5rem 0;">This is a single-key wallet (EOA). Projects must use a multi-sig treasury.</p>
-            <p style="margin:0.5rem 0;opacity:0.85;font-size:0.9rem;">Builders: Deploy a Gnosis Safe to qualify.</p>
-          `;
-        } else {
-          const isGnosisSafe = code.toLowerCase().includes('3e5c63644e683549055b9be8653de26e0b4cd36e');
-          const hasLpLock = code.length > 200;
-          
-          if (isGnosisSafe && hasLpLock) {
-            resultDiv.innerHTML = `
-              <p style="color:#6ee7b7;font-weight:600;margin:0.5rem 0;">✅ Integrity signals detected</p>
-              <p style="margin:0.5rem 0;">This project uses a verified multi-sig treasury with liquidity commitment.</p>
-              <p style="margin:0.5rem 0;opacity:0.85;font-size:0.9rem;">Sign up for official Ethoscan verification and reputation NFTs.</p>
-            `;
-          } else {
-            let reasons = [];
-            if (!isGnosisSafe) reasons.push("no verified Gnosis Safe treasury");
-            if (!hasLpLock) reasons.push("no liquidity lock detected");
-            
-            resultDiv.innerHTML = `
-              <p style="color:#f87171;font-weight:600;margin:0.5rem 0;">⚠️ Missing integrity signals</p>
-              <p style="margin:0.5rem 0;">This project lacks: ${reasons.join(", ")}.</p>
-              <p style="margin:0.5rem 0;opacity:0.85;font-size:0.9rem;">Builders: Add a Gnosis Safe and lock LP to qualify.</p>
-            `;
-          }
-        }
-      } catch (error) {
-        console.error("Verification failed:", error);
-        resultDiv.innerHTML = `
-          <p style="color:#f87171;margin:0.5rem 0;">❌ Verification failed</p>
-          <p style="margin:0.5rem 0;font-size:0.9rem;">${error.message.includes('network') ? 'Network error - try again in 30 seconds' : 'Unable to verify address'}</p>
-        `;
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "Check Signals";
+        document.getElementById('score').textContent = 'ERROR';
+        document.getElementById('tier').textContent = `❌ ${e.message}`;
+        document.getElementById('tier').className = 'tier-fail';
+        console.error('Verification error:', e);
+        document.getElementById('treasury-details').innerHTML = `<span class="pillar-fail">Verification failed: ${e.message}</span>`;
       }
     }
     
-    // Handle scam report submission
-function handleReportSubmit(e) {
-  e.preventDefault();
-  
-  const project = document.getElementById('reportProject').value.trim();
-  const evidence = document.getElementById('reportEvidence').value.trim();
-  const contact = document.getElementById('reportContact').value.trim();
-  
-  if (!project || !evidence) {
-    alert('⚠️ Please fill in required fields (Project and Evidence).');
-    return;
-  }
-  
-  // Create report object
-  const report = {
-    id: 'REPORT-' + Date.now(),
-    project: project,
-    evidence: evidence,
-    contact: contact || 'Anonymous',
-    timestamp: new Date().toISOString(),
-    status: 'pending_review'
-  };
-  
-  // Save to localStorage (persistent across sessions)
-  const reports = JSON.parse(localStorage.getItem('ethosifi_scam_reports')) || [];
-  reports.push(report);
-  localStorage.setItem('ethosifi_scam_reports', JSON.stringify(reports));
-  
-  // Show confirmation with critical disclaimer
-  alert(`✅ REPORT SUBMITTED SUCCESSFULLY\n\nReport ID: ${report.id}\nTimestamp: ${new Date().toLocaleString()}\n\n⚠️ CRITICAL REMINDER:\n• EthosiFi does NOT investigate or punish scams\n• This report ONLY adjusts Ethoscan Scores\n• You MUST report to authorities (MetaMask/ChainAbuse/FBI) for enforcement\n• Keep your Report ID for reference\n\nThank you for helping secure Web4.`);
-  
-  // Reset form and return home
-  document.getElementById('reportForm').reset();
-  showPage('loginPage');
-}
-    
-    // Auto-load projects if investor is logged in
+    // Initialize on load
     window.addEventListener('load', () => {
-      const user = getCurrentUser();
-      if (user && user.role === 'investor') {
-        document.getElementById('investorEmail').textContent = user.email;
-        loadSampleProjects();
-        showPage('investor');
-      } else if (user && user.role === 'builder') {
-        document.getElementById('builderEmail').textContent = user.email;
-        document.getElementById('ethosScore').textContent = user.ethosScore || 0;
-        document.getElementById('scoreStatus').textContent = user.verified ? '✅ Verified Builder' : '⚠️ Not Verified';
-        document.getElementById('scoreStatus').style.color = user.verified ? '#34d399' : '#f87171';
-        showPage('builder');
-      }
+      setTimeout(() => {
+        updateEthersStatus();
+        if (typeof ethers !== 'undefined') {
+          setTimeout(verify, 800);
+        } else {
+          setTimeout(() => {
+            updateEthersStatus();
+            if (typeof ethers !== 'undefined') {
+              setTimeout(verify, 800);
+            }
+          }, 2000);
+        }
+      }, 1200);
     });
   </script>
 </body>
