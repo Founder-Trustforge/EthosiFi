@@ -1,446 +1,568 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>EthosiFi Verification - X1 Testnet</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-    window.ethersFallback = `(function(){window.ethers=window.ethers||{};window.ethers.providers=window.ethers.providers||{};window.ethers.providers.JsonRpcProvider=class{constructor(url){this.url=url}async getCode(address){const r=await fetch(this.url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:"2.0",method:"eth_getCode",params:[address,"latest"],id:1})});const d=await r.json();return d.result||"0x"}async call(tx){const r=await fetch(this.url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:"2.0",method:"eth_call",params:[tx,"latest"],id:2})});const d=await r.json();return d.result||"0x"}async getBlock(tag){const r=await fetch(this.url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:"2.0",method:"eth_getBlockByNumber",params:[tag==="latest"?"latest":'0x'+tag.toString(16),false],id:3})});const d=await r.json();return{timestamp:parseInt(d.result.timestamp,16)}}};window.ethers.Contract=class{constructor(a,b,p){this.address=a;this.abi=b;this.provider=p}encodeFunctionData(n){if(n.includes('getOwners'))return'0x1626ba7e';if(n.includes('masterCopy'))return'0xa619486e';return'0x'}async getOwners(){try{const d=this.encodeFunctionData('getOwners');const r=await this.provider.call({to:this.address,data:d});return[this.address]}catch(e){return[this.address]}}async masterCopy(){try{const d=this.encodeFunctionData('masterCopy');const r=await this.provider.call({to:this.address,data:d});return this.address}catch(e){return this.address}}};window.ethers.utils=window.ethers.utils||{};window.ethers.utils.Interface=class{constructor(a){this.abi=a}encodeFunctionData(n){if(n==="getOwners()")return'0x1626ba7e';if(n==="masterCopy()")return'0xa619486e';return'0x'}};console.log('✅ Using fallback ethers.js')})();
-  </script>
-  <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      if (typeof ethers === 'undefined') {
-        console.warn('⚠️ ethers.js CDN failed - using fallback');
-        eval(window.ethersFallback);
-      }
-    });
-  </script>
-  <script src="ethoscan.verifier.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: #000814;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      color: #e0f7ff;
-    }
-    canvas#matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-    .content {
-      position: relative;
-      z-index: 1;
-      padding: 2.5rem;
-      max-width: 850px;
-      margin: 0 auto;
-    }
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1.2rem;
-      background: linear-gradient(90deg, #00a8cc, #00d1ff, #00f0ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-    .banner {
-      background: rgba(0, 25, 45, 0.85);
-      border-left: 4px solid #00d1ff;
-      padding: 1.4rem;
-      margin: 1.8rem 0;
-      border-radius: 0 12px 12px 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      box-shadow: 0 0 20px rgba(0, 209, 255, 0.15);
-    }
-    .banner h2 {
-      color: #00f0ff;
-      margin-bottom: 0.6rem;
-      font-size: 1.4rem;
-    }
-    .status {
-      padding: 1rem;
-      margin: 1.2rem 0;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .status-ok { 
-      background: rgba(0, 35, 60, 0.9); 
-      border-left: 4px solid #00d1ff; 
-      color: #00f0ff;
-    }
-    .status-error { 
-      background: rgba(60, 15, 25, 0.9); 
-      border-left: 4px solid #ff5252; 
-      color: #ff8a8a;
-    }
-    .status-warn {
-      background: rgba(45, 35, 15, 0.9);
-      border-left: 4px solid #ffc107;
-      color: #ffd750;
-    }
-    input {
-      width: 100%;
-      padding: 1rem;
-      background: rgba(0, 30, 55, 0.95);
-      border: 1px solid #00a8cc;
-      color: #e0f7ff;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 1.05rem;
-      border-radius: 8px;
-      margin: 0.7rem 0;
-      transition: all 0.3s;
-    }
-    input:focus {
-      outline: none;
-      border-color: #00d1ff;
-      box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.2);
-    }
-    button {
-      background: linear-gradient(120deg, #001a2a 0%, #002d4a 100%);
-      color: #00f0ff;
-      border: 1px solid #00a8cc;
-      padding: 1rem 1.8rem;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 10px;
-      transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(0, 168, 204, 0.25);
-    }
-    button:hover {
-      background: linear-gradient(120deg, #00253a 0%, #003d5a 100%);
-      border-color: #00d1ff;
-      box-shadow: 0 6px 20px rgba(0, 209, 255, 0.4);
-      transform: translateY(-1px);
-    }
-    button:active {
-      transform: translateY(0);
-    }
-    #result {
-      margin-top: 2.2rem;
-      padding: 2rem;
-      background: rgba(0, 35, 65, 0.92);
-      border: 1px solid rgba(0, 168, 204, 0.3);
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 30, 60, 0.5);
-      display: none;
-    }
-    .score {
-      font-size: 3.8rem;
-      font-weight: 800;
-      margin: 0.8rem 0;
-      background: linear-gradient(90deg, #00a8cc, #00d1ff, #00f0ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 25px rgba(0, 209, 255, 0.4);
-    }
-    .tier-pass { 
-      color: #00f0ff; 
-      text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-      font-weight: 700;
-    }
-    .tier-warn { 
-      color: #ffd750; 
-      text-shadow: 0 0 15px rgba(255, 215, 80, 0.5);
-      font-weight: 700;
-    }
-    .tier-fail { 
-      color: #ff6b6b; 
-      text-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
-      font-weight: 700;
-    }
-    .pillar {
-      margin: 1.4rem 0;
-      padding: 1.1rem;
-      background: rgba(0, 40, 75, 0.7);
-      border-radius: 10px;
-      border-left: 3px solid #00a8cc;
-      transition: all 0.3s;
-    }
-    .pillar:hover {
-      background: rgba(0, 45, 85, 0.85);
-      border-left: 3px solid #00d1ff;
-      transform: translateX(5px);
-    }
-    .pillar-title {
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      font-size: 1.15rem;
-      color: #00f0ff;
-    }
-    .pillar-pass { color: #4ade80; font-weight: 600; }
-    .pillar-fail { color: #ff6b6b; font-weight: 600; }
-    .risks {
-      margin: 1.5rem 0;
-      padding: 1.2rem;
-      background: rgba(45, 15, 30, 0.85);
-      border-left: 4px solid #ff5252;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 82, 82, 0.15);
-    }
-    .warnings {
-      margin: 1.5rem 0;
-      padding: 1.2rem;
-      background: rgba(40, 35, 20, 0.85);
-      border-left: 4px solid #ffc107;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 193, 7, 0.15);
-    }
-    .warning-item { margin: 0.4rem 0; line-height: 1.5; }
-    .footer {
-      margin-top: 3.5rem;
-      padding: 2rem;
-      border-top: 1px solid rgba(0, 168, 204, 0.3);
-      font-size: 0.95rem;
-      opacity: 0.85;
-      line-height: 1.7;
-    }
-    .footer p { margin: 0.4rem 0; }
-    @media (max-width: 768px) {
-      .content { padding: 1.5rem; }
-      h1 { font-size: 2.1rem; }
-      .score { font-size: 2.6rem; }
-      .banner { padding: 1rem; font-size: 0.95rem; }
-      button { width: 100%; padding: 0.9rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthosiFi - The Unstealable Wallet</title>
+    <meta name="description" content="The unstealable wallet with invisible UX. Time-locked protection with biometric bypass. No seed phrases. No gas fees.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --accent: #00d4aa;
+            --accent-glow: rgba(0, 212, 170, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --border: #1f1f2e;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), #00a884);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent), #00a884);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent);
+        }
+        
+        .stats {
+            padding: 4rem 5%;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .features {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .how-it-works {
+            padding: 6rem 5%;
+            background: var(--bg-secondary);
+        }
+        
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .testnet-cta {
+            padding: 6rem 5%;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+        
+        .testnet-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testnet-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .testnet-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testnet-box p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-section {
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .contact-section h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-section a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
-  
-  <div class="content">
-    <h1>EthosiFi Protocol</h1>
-    
-    <div class="banner">
-      <h2>🌊 Behavioral Trust Layer for X1 EcoChain Testnet</h2>
-      <p>✅ REAL ON-CHAIN VERIFICATION ONLY — ZERO FABRICATION</p>
-      <p>✅ Treasury Transparency: Gnosis Safe detection via bytecode pattern matching</p>
-      <p>⚠️ LP Lock / Team / Pledge verification requires registry contracts not yet deployed by X1</p>
-    </div>
-    
-    <div id="ethers-status" class="status status-error">
-      ⏳ Initializing verification engine...
-    </div>
-    
-    <div>
-      <label style="display:block;font-weight:600;margin-bottom:0.6rem;font-size:1.1rem;color:#00d1ff">Wallet Address to Verify</label>
-      <input type="text" id="wallet" value="0xc33f3fe9802558E35A76B7F111d1df91B896C3cB" placeholder="0x..." autocomplete="off">
-      <button onclick="verify()">Verify on X1 Testnet</button>
-    </div>
-    
-    <div id="result">
-      <div class="score" id="score">0/500</div>
-      <div id="tier" class="tier-fail" style="font-size:1.6rem;margin:0.7rem 0;font-weight:700"></div>
-      
-      <div class="pillar">
-        <div class="pillar-title">Treasury Transparency (250 pts)</div>
-        <div id="treasury-details" style="font-size:1.05rem;line-height:1.6">Checking Gnosis Safe treasury...</div>
-      </div>
-      
-      <div class="pillar">
-        <div class="pillar-title">Liquidity Commitment (150 pts)</div>
-        <div id="liquidity-details" style="font-size:1.05rem;line-height:1.6">Checking LP lock status...</div>
-      </div>
-      
-      <div class="pillar">
-        <div class="pillar-title">Team Transparency (50 pts)</div>
-        <div id="team-details" style="font-size:1.05rem;line-height:1.6">Checking team verification...</div>
-      </div>
-      
-      <div class="pillar">
-        <div class="pillar-title">Fair Launch Pledge (50 pts)</div>
-        <div id="pledge-details" style="font-size:1.05rem;line-height:1.6">Checking fair launch pledge...</div>
-      </div>
-      
-      <div id="risks-container"></div>
-      <div id="warnings-container"></div>
-    </div>
-    
-    <div class="footer">
-      <p><strong>EthosiFi Protocol</strong> — Proof of Ethics, On-Chain</p>
-      <p>🌊 Network: X1 EcoChain Testnet (Chain ID: 10778)</p>
-      <p>🔗 RPC: https://maculatus-rpc.x1eco.com</p>
-      <p>👤 Protocol Owner: 0xc33f3fe9802558E35A76B7F111d1df91B896C3cB</p>
-      <p style="margin-top:0.8rem;color:#88ccff;font-style:italic">Transparent verification — no fabricated results • Built with integrity</p>
-    </div>
-  </div>
-  
-  <script>
-    // Matrix rain animation - BLUE TURQUOISE THEME
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
-    // Oceanic character set
-    const chars = '0123456789ABCDEF🌊💧🌀⚡🔱🌊';
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-    
-    const drops = [];
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * canvas.height / fontSize;
-    }
-    
-    function draw() {
-      // Deep ocean background with subtle gradient
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, 'rgba(0, 8, 20, 0.97)');
-      gradient.addColorStop(1, 'rgba(0, 15, 35, 0.99)');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Turquoise text with depth variation
-      for (let i = 0; i < drops.length; i++) {
-        // Vary color by position for depth effect
-        const depth = (drops[i] * fontSize) / canvas.height;
-        const hue = 190 - (depth * 40); // Shift from cyan to deep blue
-        const brightness = 80 - (depth * 30);
-        ctx.fillStyle = `hsl(${hue}, 100%, ${brightness}%)`;
-        
-        const text = chars.charAt(Math.floor(Math.random() * chars.length));
-        ctx.font = `${fontSize}px monospace`;
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        
-        // Reset drops with oceanic rhythm
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        
-        drops[i] += 0.8 + (Math.random() * 0.4); // Natural flow variation
-      }
-    }
-    
-    // Smooth animation
-    let lastTime = 0;
-    function animate(time) {
-      if (time - lastTime > 50) { // 20 FPS for performance
-        draw();
-        lastTime = time;
-      }
-      requestAnimationFrame(animate);
-    }
-    animate(0);
-  </script>
-  
-  <script>
-    function updateEthersStatus() {
-      const statusDiv = document.getElementById('ethers-status');
-      if (typeof ethers !== 'undefined') {
-        statusDiv.className = 'status status-ok';
-        statusDiv.innerHTML = '✅ Verification engine ready • Connected to X1 Testnet';
-        return true;
-      } else {
-        statusDiv.className = 'status status-error';
-        statusDiv.innerHTML = '⚠️ Using fallback RPC engine (CDN blocked) • Verification still functional';
-        return false;
-      }
-    }
-    
-    async function verify() {
-      if (typeof ethers === 'undefined') {
-        alert('⚠️ Verification engine not ready. Please wait 2 seconds or refresh page.');
-        return;
-      }
-      
-      const addr = document.getElementById('wallet').value.trim();
-      if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) {
-        alert('❌ Invalid Ethereum address format');
-        return;
-      }
-      
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('score').textContent = '.../500';
-      document.getElementById('tier').textContent = '🔍 Verifying on X1 Testnet...';
-      document.getElementById('tier').className = 'tier-fail';
-      
-      document.getElementById('treasury-details').innerHTML = 'Scanning bytecode for Gnosis Safe pattern...';
-      document.getElementById('liquidity-details').innerHTML = 'Checking LP lock registry status...';
-      document.getElementById('team-details').innerHTML = 'Checking team verification registry...';
-      document.getElementById('pledge-details').innerHTML = 'Checking fair launch pledge registry...';
-      
-      document.getElementById('risks-container').innerHTML = '';
-      document.getElementById('warnings-container').innerHTML = '';
-      
-      try {
-        const scanner = new Ethoscan();
-        const report = await scanner.verify(addr);
-        
-        document.getElementById('score').textContent = `${report.score}/500`;
-        document.getElementById('tier').textContent = report.tier;
-        document.getElementById('tier').className = 
-          report.score >= 400 ? 'tier-pass' : 
-          report.score >= 250 ? 'tier-warn' : 'tier-fail';
-        
-        const p = report.pillars;
-        const treasuryEl = document.getElementById('treasury-details');
-        treasuryEl.innerHTML = `<span class="${p.treasuryTransparency.verified ? 'pillar-pass' : 'pillar-fail'}">${p.treasuryTransparency.details}</span>`;
-        treasuryEl.closest('.pillar').style.borderLeft = p.treasuryTransparency.verified ? '3px solid #00f0ff' : '3px solid #ff6b6b';
-        
-        document.getElementById('liquidity-details').innerHTML = `<span class="${p.liquidityCommitment.verified ? 'pillar-pass' : 'pillar-fail'}">${p.liquidityCommitment.details}</span>`;
-        document.getElementById('team-details').innerHTML = `<span class="${p.teamTransparency.verified ? 'pillar-pass' : 'pillar-fail'}">${p.teamTransparency.details}</span>`;
-        document.getElementById('pledge-details').innerHTML = `<span class="${p.fairLaunchPledge.verified ? 'pillar-pass' : 'pillar-fail'}">${p.fairLaunchPledge.details}</span>`;
-        
-        if (report.risks.length) {
-          let html = '<div class="risks"><strong>⚠️ RISKS DETECTED:</strong><ul style="margin-top:0.6rem;padding-left:1.4rem">';
-          report.risks.forEach(r => html += `<li style="margin:0.3rem 0">${r}</li>`);
-          html += '</ul></div>';
-          document.getElementById('risks-container').innerHTML = html;
-        }
-        
-        if (report.warnings.length) {
-          let html = '<div class="warnings"><strong>🌊 TRANSPARENT DISCLOSURE:</strong><ul style="margin-top:0.6rem;padding-left:1.4rem">';
-          report.warnings.forEach(w => html += `<li class="warning-item">${w}</li>`);
-          html += '</ul></div>';
-          document.getElementById('warnings-container').innerHTML = html;
-        }
-        
-      } catch (e) {
-        document.getElementById('score').textContent = 'ERROR';
-        document.getElementById('tier').textContent = `❌ ${e.message}`;
-        document.getElementById('tier').className = 'tier-fail';
-        console.error('Verification error:', e);
-        document.getElementById('treasury-details').innerHTML = `<span class="pillar-fail">Verification failed: ${e.message}</span>`;
-      }
-    }
-    
-    // Initialize on load
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        updateEthersStatus();
-        if (typeof ethers !== 'undefined') {
-          setTimeout(verify, 800);
-        } else {
-          setTimeout(() => {
-            updateEthersStatus();
-            if (typeof ethers !== 'undefined') {
-              setTimeout(verify, 800);
-            }
-          }, 2000);
-        }
-      }, 1200);
-    });
-  </script>
+    <nav>
+        <div class="logo">EthosiFi</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="mailto:founder@ethosifi.com">Contact</a>
+            <a href="https://ethosifi.xyz" class="btn-primary">Try Testnet</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Testnet Live on Base Sepolia</div>
+            <h1>
+                The <span class="gradient-text">Unstealable</span> Wallet
+            </h1>
+            <p class="hero-subtitle">
+                Security that just works. Time-locked protection with biometric bypass. 
+                No seed phrases. No gas fees. Your assets stay yours, even when your keys don't.
+            </p>
+            <div class="hero-cta">
+                <a href="https://ethosifi.xyz" class="btn-primary">Try Testnet Free</a>
+                <a href="mailto:founder@ethosifi.com" class="btn-secondary">Contact Founder</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div>
+                <span class="stat-value">$2.9B</span>
+                <div class="stat-label">Stolen in 2024</div>
+            </div>
+            <div>
+                <span class="stat-value">0</span>
+                <div class="stat-label">Testnet Hacks</div>
+            </div>
+            <div>
+                <span class="stat-value">48h</span>
+                <div class="stat-label">Time-Lock Protection</div>
+            </div>
+            <div>
+                <span class="stat-value">10s</span>
+                <div class="stat-label">Wallet Creation</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Armor, Not Warnings</h2>
+            <p>From Anti-Scam verification to impenetrable infrastructure</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Time-Locked Withdrawals</h3>
+                <p>Every high-value transfer enters a 24-48 hour delay. Thieves can't rush, but you can bypass instantly with biometrics.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Biometric Authentication</h3>
+                <p>Face ID. Touch ID. No seed phrases to lose or leak. Your biology is your backup.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Guardian Network</h3>
+                <p>Trusted contacts freeze suspicious transactions during the delay period. Decentralized security.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Gasless Transactions</h3>
+                <p>Pay in USDC, DAI, or any token. Never hold ETH for gas. Invisible blockchain complexity.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>AI Fraud Detection</h3>
+                <p>Real-time risk scoring blocks anomalous transactions before they execute.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Cross-Chain Native</h3>
+                <p>One balance, all chains. Automatic routing to Base, Optimism, Arbitrum. No bridging headaches.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Secure by default, fast when you need it</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Create Wallet</h3>
+                    <p>Face ID setup. No seed phrase to write down. No paper to lose. 10 seconds.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Receive Funds</h3>
+                    <p>One address works on all chains. USDC arrives on Base, Optimism, anywhere. We handle the routing.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Send Instantly</h3>
+                    <p>Biometric bypass approves transactions immediately. You move fast. Thieves wait 48 hours.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Stay Protected</h3>
+                    <p>If keys are stolen, time-locks activate. Guardians get alerts. AI blocks anomalies. Assets stay yours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testnet-cta">
+        <div class="testnet-box">
+            <h2>Try It Now</h2>
+            <p>Live on Base Sepolia. Free testnet ETH. No real funds at risk. Experience the unstealable wallet.</p>
+            <a href="https://ethosifi.xyz" class="btn-primary">Launch Testnet App</a>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+                Need testnet ETH? <a href="https://www.coinbase.com/faucets/base-ethereum-sepolia-faucet" target="_blank" style="color: var(--accent);">Get it free from Coinbase</a>
+            </p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Building Something?</h2>
+        <p>Integrate EthosiFi into your wallet or protocol.</p>
+        <a href="mailto:founder@ethosifi.com">founder@ethosifi.com</a>
+    </section>
+
+    <footer>
+        <p>© 2025 EthosiFi. Open source. Audits pending. Built on ERC-7579.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://twitter.com/ethosifi" style="color: var(--text-secondary); margin: 0 1rem;">Twitter</a>
+            <a href="https://github.com/ethosifi" style="color: var(--text-secondary); margin: 0 1rem;">GitHub</a>
+            <a href="mailto:founder@ethosifi.com" style="color: var(--text-secondary); margin: 0 1rem;">Contact</a>
+        </p>
+    </footer>
 </body>
-</html>
+  </html>
+  
